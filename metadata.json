@@ -1,0 +1,8 @@
+{
+  "name": "Hello World Portfolio Starter",
+  "description": "A visually polished Hello World starter app for a developer's personal portfolio landing page.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
