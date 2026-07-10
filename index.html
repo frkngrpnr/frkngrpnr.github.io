@@ -47,10 +47,20 @@
       .book-container {
         perspective: 1200px;
         transform-style: preserve-3d;
+        user-select: none;
+        -webkit-user-select: none;
       }
       .book-card {
         transform-style: preserve-3d;
         transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-user-drag: none;
+      }
+      .book-card * {
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-user-drag: none;
       }
       
       /* Webprint specific styles to guarantee pristine CV layout */
@@ -92,7 +102,7 @@
           <span class="font-display font-extrabold tracking-tight text-xl text-white block">
             Furkan Gürpınar
           </span>
-          <span class="text-[10px] text-teal-400 font-mono tracking-widest block uppercase font-bold">M.S. Computational Scientist</span>
+          <span class="text-[10px] text-teal-400 font-mono tracking-widest block uppercase font-bold">M.S. Computer Scientist</span>
         </div>
       </div>
 
@@ -166,7 +176,7 @@
               <div class="w-8 h-8 bg-blue-500/10 border border-blue-500/20 rounded-lg flex items-center justify-center text-blue-400">
                 <i data-lucide="book-open" class="w-4 h-4"></i>
               </div>
-              <h3 class="text-2xl font-extrabold text-white tracking-tight">3D Skill Book Gallery</h3>
+              <h3 class="text-2xl font-extrabold text-white tracking-tight">Skills</h3>
             </div>
             <p class="text-sm text-white/50">
               Furkan's core expertise bound in a tactile sliding book catalog. Touch/drag or swipe left/right to flip pages.
@@ -196,8 +206,14 @@
           <!-- 3D Book Slide wrapper -->
           <div class="book-container w-full max-w-2xl flex items-center justify-center relative cursor-grab active:cursor-grabbing" id="drag-container">
             
+            <!-- Previous Book Background Card -->
+            <div id="book-card-prev" class="book-card absolute w-full bg-gradient-to-b from-[#15151a] to-[#101012] border border-[#2d2d35]/40 rounded-r-[1.5rem] rounded-l-[0.5rem] shadow-lg overflow-hidden flex flex-col sm:flex-row -z-30 pointer-events-none transition-all duration-300 ease-out origin-right" style="transform: translateX(-35%) scale(0.78) rotateY(32deg); opacity: 0.22;"></div>
+
+            <!-- Next Book Background Card -->
+            <div id="book-card-next" class="book-card absolute w-full bg-gradient-to-b from-[#15151a] to-[#101012] border border-[#2d2d35]/40 rounded-r-[1.5rem] rounded-l-[0.5rem] shadow-lg overflow-hidden flex flex-col sm:flex-row -z-30 pointer-events-none transition-all duration-300 ease-out origin-left" style="transform: translateX(35%) scale(0.78) rotateY(-32deg); opacity: 0.22;"></div>
+
             <!-- Book content render mount -->
-            <div id="book-card-target" class="book-card w-full bg-gradient-to-b from-[#15151a] to-[#101012] border border-[#2d2d35]/60 rounded-r-[1.5rem] rounded-l-[0.5rem] shadow-[25px_25px_50px_-10px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col sm:flex-row relative transform-gpu">
+            <div id="book-card-target" class="book-card w-full bg-gradient-to-b from-[#15151a] to-[#101012] border border-[#2d2d35]/60 rounded-r-[1.5rem] rounded-l-[0.5rem] shadow-[25px_25px_50px_-10px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col sm:flex-row relative transform-gpu z-10">
               <!-- Spine section (populated dynamically) -->
               <div id="book-spine" class="w-6 sm:w-10 bg-gradient-to-r from-blue-600 to-indigo-700 border-r border-white/10 flex flex-col justify-between items-center py-6 relative shadow-inner shrink-0"></div>
               <!-- Page contents (populated dynamically) -->
@@ -743,87 +759,114 @@
       let isDragging = false;
       const swipeThreshold = 55;
 
-      // Render Active Book Page
+      // Single unified book inner HTML builder
+      function buildBookInnerHTML(book, index) {
+        return `
+          <!-- Spine section -->
+          <div class="w-6 sm:w-10 bg-gradient-to-r ${book.spineColor} border-r border-white/10 flex flex-col justify-between items-center py-6 relative shadow-inner shrink-0">
+            <div class="space-y-4 w-full">
+              <div class="h-[2px] bg-black/40 w-full"></div>
+              <div class="h-[2px] bg-black/40 w-full"></div>
+              <div class="h-[2px] bg-black/40 w-full"></div>
+            </div>
+            <span class="text-[9px] font-mono font-bold tracking-[0.3em] text-white/50 -rotate-90 uppercase my-8 origin-center truncate w-24 block text-center">
+              ${book.primaryTech}
+            </span>
+            <div class="space-y-4 w-full">
+              <div class="h-[2px] bg-black/40 w-full"></div>
+              <div class="h-[2px] bg-black/40 w-full"></div>
+            </div>
+            <div class="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-amber-400/50"></div>
+            <div class="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-amber-400/50"></div>
+          </div>
+          <!-- Page contents -->
+          <div class="flex-1 p-8 sm:p-10 flex flex-col justify-between space-y-6 relative overflow-hidden">
+            <!-- Subtle texture -->
+            <div class="absolute inset-0 opacity-[0.02] mix-blend-overlay pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"n\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.65\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23n)\"/%3E%3C/svg%3E')"></div>
+
+            <!-- Top meta row -->
+            <div class="flex justify-between items-start gap-4 z-10">
+              <div class="space-y-1 text-left">
+                <span class="text-[10px] font-mono text-teal-400 uppercase tracking-widest block font-bold">
+                  PAGE ${index + 1} // TECH_PORTFOLIO
+                </span>
+                <h4 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-none">
+                  ${book.title}
+                </h4>
+                <p class="text-xs text-white/40 font-mono mt-1">
+                  ${book.subtitle}
+                </p>
+              </div>
+              <!-- Tactical Icon matching skill -->
+              <div class="p-2.5 bg-white/5 border border-white/5 rounded-xl shrink-0">
+                <i data-lucide="${book.icon}" class="w-8 h-8 text-teal-400"></i>
+              </div>
+            </div>
+
+            <!-- Deep descriptive narrative section text-left -->
+            <div class="space-y-4 z-10 text-left">
+              <p class="text-sm text-white/70 leading-relaxed italic border-l-2 border-teal-500/30 pl-4">
+                "${book.description}"
+              </p>
+
+              <!-- Skills & Tools listed -->
+              <div class="space-y-2">
+                <p class="text-[10px] font-mono text-white/40 uppercase tracking-wider">Expertise & Tools</p>
+                <div class="flex flex-wrap gap-2">
+                  ${book.skills.map(s => `
+                    <span class="px-2.5 py-1 bg-white/2 hover:bg-white/5 border border-white/5 rounded-md text-xs font-mono text-white/80 transition-colors">
+                      ${s}
+                    </span>
+                  `).join('')}
+                </div>
+              </div>
+            </div>
+
+            <!-- Page index footer -->
+            <div class="flex justify-between items-center text-[10px] font-mono text-white/30 border-t border-white/5 pt-4 z-10">
+              <span>BOĞAZİÇİ M.S. PORTFOLIO</span>
+              <span class="text-teal-400/80 font-bold">NEXT.js workflow ready</span>
+            </div>
+
+            <!-- Golden right corner indicators -->
+            <div class="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-amber-400/40"></div>
+            <div class="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-amber-400/40"></div>
+          </div>
+        `;
+      }
+
+      // Render Active Book Page & Side stacks
       function renderActiveBook() {
         const book = skillBooks[activeBookIndex];
+        const prevIndex = (activeBookIndex - 1 + skillBooks.length) % skillBooks.length;
+        const nextIndex = (activeBookIndex + 1) % skillBooks.length;
         
         // 1. Update counters
         document.getElementById("book-counter").textContent = `${String(activeBookIndex + 1).padStart(2, '0')} / ${String(skillBooks.length).padStart(2, '0')}`;
         
-        // 2. Build Spine html
-        const spineTarget = document.getElementById("book-spine");
-        spineTarget.className = `w-6 sm:w-10 bg-gradient-to-r ${book.spineColor} border-r border-white/10 flex flex-col justify-between items-center py-6 relative shadow-inner shrink-0`;
-        spineTarget.innerHTML = `
-          <div class="space-y-4 w-full">
-            <div class="h-[2px] bg-black/40 w-full"></div>
-            <div class="h-[2px] bg-black/40 w-full"></div>
-            <div class="h-[2px] bg-black/40 w-full"></div>
-          </div>
-          <span class="text-[9px] font-mono font-bold tracking-[0.3em] text-white/50 -rotate-90 uppercase my-8 origin-center truncate w-24 block text-center">
-            ${book.primaryTech}
-          </span>
-          <div class="space-y-4 w-full">
-            <div class="h-[2px] bg-black/40 w-full"></div>
-            <div class="h-[2px] bg-black/40 w-full"></div>
-          </div>
-          <div class="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-amber-400/50"></div>
-          <div class="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-amber-400/50"></div>
-        `;
+        // 2. Build the main active cover
+        const activeCard = document.getElementById("book-card-target");
+        activeCard.innerHTML = buildBookInnerHTML(book, activeBookIndex);
 
-        // 3. Build Cover details html
-        const coverTarget = document.getElementById("book-cover");
-        coverTarget.innerHTML = `
-          <!-- Subtle texture -->
-          <div class="absolute inset-0 opacity-[0.02] mix-blend-overlay pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"n\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.65\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23n)\"/%3E%3C/svg%3E')"></div>
+        // 3. Build Previous and Next background preview covers
+        const prevCard = document.getElementById("book-card-prev");
+        const nextCard = document.getElementById("book-card-next");
 
-          <!-- Top meta row -->
-          <div class="flex justify-between items-start gap-4 z-10">
-            <div class="space-y-1">
-              <span class="text-[10px] font-mono text-teal-400 uppercase tracking-widest block font-bold">
-                PAGE ${activeBookIndex + 1} // TECH_PORTFOLIO
-              </span>
-              <h4 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-none">
-                ${book.title}
-              </h4>
-              <p class="text-xs text-white/40 font-mono mt-1">
-                ${book.subtitle}
-              </p>
-            </div>
-            <!-- Tactical Icon matching skill -->
-            <div class="p-2.5 bg-white/5 border border-white/5 rounded-xl shrink-0">
-              <i data-lucide="${book.icon}" class="w-8 h-8 text-teal-400"></i>
-            </div>
-          </div>
+        prevCard.innerHTML = buildBookInnerHTML(skillBooks[prevIndex], prevIndex);
+        nextCard.innerHTML = buildBookInnerHTML(skillBooks[nextIndex], nextIndex);
 
-          <!-- Deep descriptive narrative section -->
-          <div class="space-y-4 z-10">
-            <p class="text-sm text-white/70 leading-relaxed italic border-l-2 border-teal-500/30 pl-4">
-              "${book.description}"
-            </p>
+        // Position background cards responsively
+        const isMobile = window.innerWidth < 640;
+        const offsetPercent = isMobile ? 18 : 35;
+        const scaleVal = isMobile ? 0.72 : 0.78;
+        const rotateVal = isMobile ? 22 : 32;
+        const opacityVal = isMobile ? 0.15 : 0.25;
 
-            <!-- Skills & Tools listed -->
-            <div class="space-y-2">
-              <p class="text-[10px] font-mono text-white/40 uppercase tracking-wider">Expertise & Tools</p>
-              <div class="flex flex-wrap gap-2">
-                ${book.skills.map(s => `
-                  <span class="px-2.5 py-1 bg-white/2 hover:bg-white/5 border border-white/5 rounded-md text-xs font-mono text-white/80 transition-colors">
-                    ${s}
-                  </span>
-                `).join('')}
-              </div>
-            </div>
-          </div>
+        prevCard.style.transform = `translateX(-${offsetPercent}%) scale(${scaleVal}) rotateY(${rotateVal}deg)`;
+        prevCard.style.opacity = opacityVal;
 
-          <!-- Page index footer -->
-          <div class="flex justify-between items-center text-[10px] font-mono text-white/30 border-t border-white/5 pt-4 z-10">
-            <span>BOĞAZİÇİ M.S. PORTFOLIO</span>
-            <span class="text-teal-400/80 font-bold">NEXT.js workflow ready</span>
-          </div>
-
-          <!-- Golden right corner indicators -->
-          <div class="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-amber-400/40"></div>
-          <div class="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-amber-400/40"></div>
-        `;
+        nextCard.style.transform = `translateX(${offsetPercent}%) scale(${scaleVal}) rotateY(-${rotateVal}deg)`;
+        nextCard.style.opacity = opacityVal;
 
         // 4. Update index indicators
         const bulletsContainer = document.getElementById("bullets-container");
@@ -835,11 +878,35 @@
         lucide.createIcons();
       }
 
+      // Live window resizing adjustment for beautiful stacking
+      window.addEventListener("resize", () => {
+        const prevCard = document.getElementById("book-card-prev");
+        const nextCard = document.getElementById("book-card-next");
+        if (prevCard && nextCard) {
+          const isMobile = window.innerWidth < 640;
+          const offsetPercent = isMobile ? 18 : 35;
+          const scaleVal = isMobile ? 0.72 : 0.78;
+          const rotateVal = isMobile ? 22 : 32;
+          const opacityVal = isMobile ? 0.15 : 0.25;
+          
+          prevCard.style.transform = `translateX(-${offsetPercent}%) scale(${scaleVal}) rotateY(${rotateVal}deg)`;
+          prevCard.style.opacity = opacityVal;
+          
+          nextCard.style.transform = `translateX(${offsetPercent}%) scale(${scaleVal}) rotateY(-${rotateVal}deg)`;
+          nextCard.style.opacity = opacityVal;
+        }
+      });
+
       function setBookIndex(index) {
         // Simple rotation exit-entrance effect
         const card = document.getElementById("book-card-target");
+        const prevCard = document.getElementById("book-card-prev");
+        const nextCard = document.getElementById("book-card-next");
+
         card.style.transform = "rotateY(40deg) scale(0.9) translateX(-100px)";
         card.style.opacity = "0";
+        if (prevCard) prevCard.style.opacity = "0";
+        if (nextCard) nextCard.style.opacity = "0";
 
         setTimeout(() => {
           activeBookIndex = index;
@@ -865,6 +932,11 @@
         isDragging = true;
         startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
         dragContainer.style.cursor = "grabbing";
+        
+        // Prevent default text selection during drags
+        if (e.cancelable && !e.type.includes('touch')) {
+          e.preventDefault();
+        }
       }
 
       function dragging(e) {
@@ -876,6 +948,37 @@
         const rotationY = Math.max(-25, Math.min(25, -diffX / 8));
         const translationX = Math.max(-120, Math.min(120, diffX));
         bookCard.style.transform = `rotateY(${rotationY}deg) translateX(${translationX}px)`;
+
+        // Dynamic multi-card visual physics response on drag
+        const prevCard = document.getElementById("book-card-prev");
+        const nextCard = document.getElementById("book-card-next");
+        if (prevCard && nextCard) {
+          const isMobile = window.innerWidth < 640;
+          const baseOffset = isMobile ? 18 : 35;
+          const baseScale = isMobile ? 0.72 : 0.78;
+          const baseRotate = isMobile ? 22 : 32;
+          const baseOpacity = isMobile ? 0.15 : 0.25;
+
+          // Drag factor between -1 and 1
+          const dragFactor = Math.min(1, Math.max(-1, diffX / 300));
+
+          // Drag left vs right dynamics
+          const prevOffset = baseOffset - (dragFactor * 12);
+          const prevScale = baseScale + (dragFactor * 0.08);
+          const prevRotate = baseRotate - (dragFactor * 15);
+          const prevOpacity = baseOpacity + (dragFactor * 0.2);
+
+          const nextOffset = baseOffset - (dragFactor * 12);
+          const nextScale = baseScale - (dragFactor * 0.08);
+          const nextRotate = baseRotate + (dragFactor * 15);
+          const nextOpacity = baseOpacity - (dragFactor * 0.2);
+
+          prevCard.style.transform = `translateX(-${prevOffset}%) scale(${prevScale}) rotateY(${prevRotate}deg)`;
+          prevCard.style.opacity = Math.max(0.04, Math.min(0.55, prevOpacity));
+
+          nextCard.style.transform = `translateX(${nextOffset}%) scale(${nextScale}) rotateY(-${nextRotate}deg)`;
+          nextCard.style.opacity = Math.max(0.04, Math.min(0.55, nextOpacity));
+        }
       }
 
       function endDrag() {
@@ -894,10 +997,31 @@
         } else {
           // Reset to straight layout with smooth spring back
           bookCard.style.transform = "rotateY(0deg) translateX(0px)";
+          
+          // Reset background cards
+          const prevCard = document.getElementById("book-card-prev");
+          const nextCard = document.getElementById("book-card-next");
+          if (prevCard && nextCard) {
+            const isMobile = window.innerWidth < 640;
+            const offsetPercent = isMobile ? 18 : 35;
+            const scaleVal = isMobile ? 0.72 : 0.78;
+            const rotateVal = isMobile ? 22 : 32;
+            const opacityVal = isMobile ? 0.15 : 0.25;
+
+            prevCard.style.transform = `translateX(-${offsetPercent}%) scale(${scaleVal}) rotateY(${rotateVal}deg)`;
+            prevCard.style.opacity = opacityVal;
+
+            nextCard.style.transform = `translateX(${offsetPercent}%) scale(${scaleVal}) rotateY(-${rotateVal}deg)`;
+            nextCard.style.opacity = opacityVal;
+          }
         }
         startX = 0;
         currentX = 0;
       }
+
+      dragContainer.addEventListener("dragstart", (e) => {
+        e.preventDefault();
+      });
 
       dragContainer.addEventListener("mousedown", startDrag);
       window.addEventListener("mousemove", dragging);
