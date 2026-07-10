@@ -3,11 +3,1106 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Hello World Portfolio Starter</title>
+    <title>Furkan Gürpınar — Portfolio</title>
+    <!-- Beautiful Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              mono: ['"JetBrains Mono"', 'monospace'],
+              display: ['"Space Grotesk"', 'sans-serif'],
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      /* Custom fine-tunings for 3D Book slider, scrollbars and print formats */
+      .scrollbar-thin::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      .scrollbar-thin::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 4px;
+      }
+      .scrollbar-thin::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 4px;
+      }
+      .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+        background: rgba(255, 255, 255, 0.25);
+      }
+      
+      /* Book rotation & perspective */
+      .book-container {
+        perspective: 1200px;
+        transform-style: preserve-3d;
+      }
+      .book-card {
+        transform-style: preserve-3d;
+        transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+      
+      /* Webprint specific styles to guarantee pristine CV layout */
+      @media print {
+        body * {
+          visibility: hidden;
+        }
+        #printable-cv, #printable-cv * {
+          visibility: visible;
+        }
+        #printable-cv {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          color: #000 !important;
+          background: #fff !important;
+        }
+        .no-print {
+          display: none !important;
+        }
+      }
+    </style>
   </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+  <body class="min-h-screen bg-[#070709] text-[#F3F4F6] font-sans selection:bg-blue-600/30 selection:text-blue-200 flex flex-col justify-between p-4 sm:p-8 md:p-16 relative overflow-x-hidden">
+    <!-- Immersive Atmospheric Lighting & Grids -->
+    <div class="absolute inset-0 bg-[linear-gradient(to_right,#1f293706_1px,transparent_1px),linear-gradient(to_bottom,#1f293706_1px,transparent_1px)] bg-[size:32px_32px] pointer-events-none"></div>
+    <div class="absolute top-[-20%] left-[-10%] w-[800px] h-[800px] bg-blue-900/10 rounded-full blur-[160px] pointer-events-none"></div>
+    <div class="absolute top-[40%] right-[-10%] w-[600px] h-[600px] bg-indigo-900/10 rounded-full blur-[140px] pointer-events-none"></div>
+    <div class="absolute bottom-[-10%] left-[20%] w-[700px] h-[700px] bg-teal-950/10 rounded-full blur-[150px] pointer-events-none"></div>
+
+    <!-- Header Navigation (Full-width wide container) -->
+    <header class="w-full max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center z-10 mb-12 gap-6 pb-6 border-b border-white/5">
+      <div class="flex items-center gap-3.5 self-start sm:self-auto" id="header-brand">
+        <div class="w-11 h-11 bg-gradient-to-tr from-blue-600 via-indigo-600 to-teal-500 rounded-xl flex items-center justify-center font-bold text-white font-mono text-lg shadow-xl shadow-blue-900/30">
+          FG
+        </div>
+        <div>
+          <span class="font-display font-extrabold tracking-tight text-xl text-white block">
+            Furkan Gürpınar
+          </span>
+          <span class="text-[10px] text-teal-400 font-mono tracking-widest block uppercase font-bold">M.S. Computational Scientist</span>
+        </div>
+      </div>
+
+      <!-- Header actions -->
+      <div class="flex items-center gap-3.5 w-full sm:w-auto justify-end">
+        <a href="mailto:gurpinarfurkan@gmail.com" class="hidden sm:flex items-center gap-2 px-4 py-2 border border-white/5 rounded-full text-xs font-semibold bg-white/5 hover:bg-white/10 text-white/80 hover:text-white transition-all font-mono">
+          <i data-lucide="mail" class="w-3.5 h-3.5 text-teal-400"></i>
+          <span>gurpinarfurkan@gmail.com</span>
+        </a>
+
+        <button onclick="openCVModal()" class="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full text-xs font-bold text-white transition-all shadow-lg shadow-blue-900/35 hover:brightness-110 active:scale-95" id="view-cv-btn">
+          <i data-lucide="file-text" class="w-4 h-4 text-white/90"></i>
+          <span>Interactive LaTeX CV</span>
+          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-white/60"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Single Column Layout Container -->
+    <main class="w-full max-w-5xl mx-auto flex-1 flex flex-col gap-10 z-10 my-4">
+      
+      <!-- 1. HERO PANEL (Wide Full-Width Single Column) -->
+      <section class="bg-[#0F0F12] border border-[#222227] rounded-[2.5rem] p-8 md:p-14 relative overflow-hidden group shadow-2xl flex flex-col justify-between" id="hero-panel">
+        <div class="absolute top-0 left-0 right-0 h-[3px] bg-gradient-to-r from-blue-500 via-indigo-500 to-teal-500"></div>
+        <div class="absolute top-8 right-10 text-[10px] font-mono text-white/10 uppercase tracking-[0.3em] hidden sm:block">
+          BOGAZICI_MEDIA_LAB // FACIAL_DYNAMICS
+        </div>
+
+        <div class="space-y-8">
+          <div class="inline-flex px-4 py-1.5 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-full text-xs font-semibold tracking-wider uppercase font-mono items-center gap-2">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 text-blue-400 animate-pulse"></i>
+            <span>Available for Research & Dev</span>
+          </div>
+
+          <div class="space-y-4">
+            <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-black leading-[1.1] tracking-tight text-white max-w-4xl">
+              Bridging Machine Learning, <span class="text-blue-500 bg-clip-text">Computer Vision</span> & Complex Engineering.
+            </h2>
+            <p class="text-lg md:text-xl text-white/60 leading-relaxed max-w-3xl">
+              Computational Science and Mechanical Engineering alumnus of <b>Boğaziçi University</b>. Award-winning researcher in face analysis and facial dynamics at the Utrecht and Boğaziçi Media Labs. Specialist in building robust mobile/desktop interfaces and decentralized smart systems.
+            </p>
+          </div>
+        </div>
+
+        <!-- Quick Stats Panel -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-10 mt-10 border-t border-white/5 text-left">
+          <div>
+            <p class="text-2xl md:text-3xl font-bold text-white">9+</p>
+            <p class="text-xs text-white/40 font-mono mt-1 uppercase tracking-wider">Publications</p>
+          </div>
+          <div>
+            <p class="text-2xl md:text-3xl font-bold text-teal-400">1st Place</p>
+            <p class="text-xs text-white/40 font-mono mt-1 uppercase tracking-wider">CVPR ML Challenge</p>
+          </div>
+          <div>
+            <p class="text-2xl md:text-3xl font-bold text-white">2010</p>
+            <p class="text-xs text-white/40 font-mono mt-1 uppercase tracking-wider">Dev Active Since</p>
+          </div>
+          <div>
+            <p class="text-2xl md:text-3xl font-bold text-indigo-400">M.S.</p>
+            <p class="text-xs text-white/40 font-mono mt-1 uppercase tracking-wider">Computational Sci.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. THE 3D BOOK SKILL LIBRARY (Slidable single-column page catalog) -->
+      <section class="bg-[#0F0F12] border border-[#222227] rounded-[2.5rem] p-8 md:p-12 flex flex-col space-y-8 relative overflow-hidden shadow-2xl" id="3d-library-panel">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 bg-blue-500/10 border border-blue-500/20 rounded-lg flex items-center justify-center text-blue-400">
+                <i data-lucide="book-open" class="w-4 h-4"></i>
+              </div>
+              <h3 class="text-2xl font-extrabold text-white tracking-tight">3D Skill Book Gallery</h3>
+            </div>
+            <p class="text-sm text-white/50">
+              Furkan's core expertise bound in a tactile sliding book catalog. Touch/drag or swipe left/right to flip pages.
+            </p>
+          </div>
+
+          <!-- Slider Navigation Arrows & Counters -->
+          <div class="flex items-center gap-4 bg-white/5 px-4 py-2 rounded-full border border-white/5 self-end md:self-auto font-mono text-sm">
+            <button onclick="prevBook()" class="p-1.5 hover:bg-white/5 rounded-full transition-all text-white/60 hover:text-white active:scale-90" title="Previous page">
+              <i data-lucide="chevron-left" class="w-5 h-5"></i>
+            </button>
+            <span id="book-counter" class="text-xs text-teal-400 font-bold tracking-widest">01 / 06</span>
+            <button onclick="nextBook()" class="p-1.5 hover:bg-white/5 rounded-full transition-all text-white/60 hover:text-white active:scale-90" title="Next page">
+              <i data-lucide="chevron-right" class="w-5 h-5"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Touch/Mouse Slidable Book Stage -->
+        <div class="relative min-h-[420px] sm:min-h-[380px] md:min-h-[440px] flex items-center justify-center py-6 select-none overflow-hidden" id="slider-stage">
+          
+          <div class="absolute top-0 right-2 flex items-center gap-1.5 text-[10px] font-mono text-white/30 bg-white/5 px-2.5 py-1 rounded-md z-20">
+            <i data-lucide="sparkles" class="w-3.5 h-3.5 animate-pulse text-amber-400"></i>
+            <span>DRAG BOOK COVER TO SLIDE PAGES</span>
+          </div>
+
+          <!-- 3D Book Slide wrapper -->
+          <div class="book-container w-full max-w-2xl flex items-center justify-center relative cursor-grab active:cursor-grabbing" id="drag-container">
+            
+            <!-- Book content render mount -->
+            <div id="book-card-target" class="book-card w-full bg-gradient-to-b from-[#15151a] to-[#101012] border border-[#2d2d35]/60 rounded-r-[1.5rem] rounded-l-[0.5rem] shadow-[25px_25px_50px_-10px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col sm:flex-row relative transform-gpu">
+              <!-- Spine section (populated dynamically) -->
+              <div id="book-spine" class="w-6 sm:w-10 bg-gradient-to-r from-blue-600 to-indigo-700 border-r border-white/10 flex flex-col justify-between items-center py-6 relative shadow-inner shrink-0"></div>
+              <!-- Page contents (populated dynamically) -->
+              <div id="book-cover" class="flex-1 p-8 sm:p-10 flex flex-col justify-between space-y-6 relative"></div>
+            </div>
+
+            <!-- Multi-page stack visuals under the active page to give realistic depth -->
+            <div class="absolute w-[95%] h-[95%] bg-[#0f0f12]/90 border border-[#2d2d35]/30 rounded-r-[1.5rem] shadow-lg translate-x-1.5 translate-y-1.5 -z-10 scale-[0.99] pointer-events-none"></div>
+            <div class="absolute w-[91%] h-[90%] bg-[#0c0c0e]/80 border border-[#2d2d35]/20 rounded-r-[1.5rem] shadow-md translate-x-3 translate-y-3 -z-20 scale-[0.97] pointer-events-none"></div>
+          </div>
+        </div>
+
+        <!-- Bottom Page Bullet indicators -->
+        <div class="flex justify-center items-center gap-2" id="bullets-container"></div>
+      </section>
+
+      <!-- 3. RESEARCH PUBLICATIONS PANEL (Single Column Wide Layout) -->
+      <section class="bg-[#0F0F12] border border-[#222227] rounded-[2.5rem] p-8 md:p-12 flex flex-col space-y-6 shadow-2xl" id="publications-panel">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 bg-amber-500/10 border border-amber-500/20 rounded-lg flex items-center justify-center text-amber-400">
+                <i data-lucide="award" class="w-4 h-4"></i>
+              </div>
+              <h3 class="text-2xl font-extrabold text-white tracking-tight">Peer-Reviewed Publications</h3>
+            </div>
+            <p class="text-sm text-white/50">
+              Peer-reviewed papers in major venues including IEEE Transactions, CVPRW, ICPR, and Springer.
+            </p>
+          </div>
+
+          <!-- Filter Tabs -->
+          <div class="flex gap-1 bg-white/5 p-1 rounded-full border border-white/5 text-xs font-semibold self-start md:self-auto" id="pub-tabs">
+            <button onclick="setPubFilter('all')" class="tab-btn px-3.5 py-1.5 rounded-full transition-all bg-blue-600 text-white shadow-md">ALL</button>
+            <button onclick="setPubFilter('Journal Paper')" class="tab-btn px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white">JOURNAL</button>
+            <button onclick="setPubFilter('Conference Paper')" class="tab-btn px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white">CONFERENCE</button>
+            <button onclick="setPubFilter('Book Chapter')" class="tab-btn px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white">BOOK</button>
+          </div>
+        </div>
+
+        <!-- Search Input -->
+        <div class="relative">
+          <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-white/30"></i>
+          <input
+            id="pub-search"
+            type="text"
+            placeholder="Filter by publication title, venue, authors, or keyword..."
+            oninput="handlePubSearch()"
+            class="w-full pl-11 pr-4 py-3 bg-white/2 border border-white/5 hover:border-white/10 focus:border-blue-500 focus:bg-[#121215] rounded-xl text-sm text-white placeholder-white/30 transition-all outline-none font-mono"
+          />
+        </div>
+
+        <!-- Scrollable list of publications -->
+        <div class="space-y-3 max-h-[380px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-white/15" id="pub-list-target">
+          <!-- Populated dynamically -->
+        </div>
+
+        <!-- Publication stats and Google Scholar link -->
+        <div class="flex flex-col sm:flex-row justify-between items-center text-[10px] font-mono text-white/30 pt-4 border-t border-white/5 gap-3">
+          <span id="pub-count-display">SHOWING 9 OF 9 SCHOLARLY WORKS</span>
+          <a 
+            href="https://scholar.google.com/scholar?q=Furkan+G%C3%BCrp%C4%B1nar" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="hover:text-blue-400 flex items-center gap-1 transition-colors hover:underline text-teal-400 font-bold"
+          >
+            <span>EXPLORE ON GOOGLE SCHOLAR</span>
+            <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+          </a>
+        </div>
+      </section>
+
+      <!-- 4. WORK & ACADEMIC EXPERIENCES (Unified Single Column Timeline) -->
+      <section class="bg-[#0F0F12] border border-[#222227] rounded-[2.5rem] p-8 md:p-12 flex flex-col space-y-8 shadow-2xl" id="timeline-panel">
+        <div class="space-y-1">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 bg-indigo-500/10 border border-indigo-500/20 rounded-lg flex items-center justify-center text-indigo-400">
+              <i data-lucide="briefcase" class="w-4 h-4"></i>
+            </div>
+            <h3 class="text-2xl font-extrabold text-white tracking-tight">Timeline & Experience</h3>
+          </div>
+          <p class="text-sm text-white/50">
+            Tracing Furkan's career from academic research laboratories to independent project deployments.
+          </p>
+        </div>
+
+        <!-- Unified Timeline Container -->
+        <div class="space-y-8 relative before:absolute before:left-4 before:top-2 before:bottom-2 before:w-[1px] before:bg-white/5">
+          
+          <!-- Experience Card 1 -->
+          <div class="relative pl-10 group/timeline">
+            <div class="absolute left-2.5 top-1.5 w-3 h-3 rounded-full bg-blue-500 group-hover/timeline:scale-125 transition-transform shadow-lg shadow-blue-500/50"></div>
+            <div class="space-y-2">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-1">
+                <span class="text-xs font-mono text-blue-400 font-bold uppercase tracking-wider">Independent // 2010 - PRESENT</span>
+                <span class="px-2.5 py-0.5 bg-blue-500/10 text-blue-400 border border-blue-500/20 text-[9px] font-mono rounded-full">WORK EXP</span>
+              </div>
+              <h4 class="text-lg font-bold text-white group-hover/timeline:text-blue-400 transition-colors">Freelance Software Developer</h4>
+              <p class="text-xs text-white/40 font-mono">Full-Stack, Android, Blockchain Logic</p>
+              <ul class="list-disc pl-4 space-y-1.5 text-xs text-white/70 max-w-4xl">
+                <li>Web design, full responsive development, and search engine optimization (SEO).</li>
+                <li>Native Android application engineering utilizing Kotlin and Java APIs.</li>
+                <li>Decentralized Solidity smart contracts deployment on the Ethereum blockchain.</li>
+                <li>High-performance real-time image processing systems for smart public transport applications.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Experience Card 2 -->
+          <div class="relative pl-10 group/timeline">
+            <div class="absolute left-2.5 top-1.5 w-3 h-3 rounded-full bg-indigo-500 group-hover/timeline:scale-125 transition-transform shadow-lg shadow-indigo-500/50"></div>
+            <div class="space-y-2">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-1">
+                <span class="text-xs font-mono text-indigo-400 font-bold uppercase tracking-wider">Boğaziçi University // 2014 - 2017</span>
+                <span class="px-2.5 py-0.5 bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 text-[9px] font-mono rounded-full">RESEARCH EXP</span>
+              </div>
+              <h4 class="text-lg font-bold text-white group-hover/timeline:text-indigo-400 transition-colors">Researcher</h4>
+              <p class="text-xs text-white/40 font-mono">Boğaziçi Media Laboratory</p>
+              <ul class="list-disc pl-4 space-y-1.5 text-xs text-white/70 max-w-4xl">
+                <li>Designed deep neural network structures for face dynamic analysis and video-based transfer learning.</li>
+                <li>Recognized and explained apparent personality patterns with high-impact research models.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Experience Card 3 -->
+          <div class="relative pl-10 group/timeline">
+            <div class="absolute left-2.5 top-1.5 w-3 h-3 rounded-full bg-teal-500 group-hover/timeline:scale-125 transition-transform shadow-lg shadow-teal-500/50"></div>
+            <div class="space-y-2">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-1">
+                <span class="text-xs font-mono text-teal-400 font-bold uppercase tracking-wider">Kadir Has University // 2014 - 2015</span>
+                <span class="px-2.5 py-0.5 bg-teal-500/10 text-teal-400 border border-teal-500/20 text-[9px] font-mono rounded-full">ACADEMIC EXP</span>
+              </div>
+              <h4 class="text-lg font-bold text-white group-hover/timeline:text-teal-400 transition-colors">Research & Teaching Assistant</h4>
+              <p class="text-xs text-white/40 font-mono">Department of Computer Science</p>
+              <ul class="list-disc pl-4 space-y-1.5 text-xs text-white/70 max-w-4xl">
+                <li>Applied time-series mathematical structures for high-accuracy market trend prediction models.</li>
+                <li>Supported classrooms in advanced lectures on Competitive Intelligence and Discrete Mathematics.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Experience Card 4 -->
+          <div class="relative pl-10 group/timeline">
+            <div class="absolute left-2.5 top-1.5 w-3 h-3 rounded-full bg-white/20 group-hover/timeline:scale-125 transition-transform"></div>
+            <div class="space-y-2">
+              <div class="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-1">
+                <span class="text-xs font-mono text-white/40 font-bold uppercase tracking-wider">Mechanical Engineering // 2010</span>
+                <span class="px-2.5 py-0.5 bg-white/5 text-white/50 border border-white/5 text-[9px] font-mono rounded-full">ACADEMIC EXP</span>
+              </div>
+              <h4 class="text-lg font-bold text-white">Teaching Assistant</h4>
+              <p class="text-xs text-white/40 font-mono">Boğaziçi University Mechanical Engineering</p>
+              <ul class="list-disc pl-4 space-y-1.5 text-xs text-white/70 max-w-4xl">
+                <li>Delivered educational support and grading for advanced MATLAB algorithms and C logic for numerical analysis.</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- 5. AWARDS & LAB REFERENCES GRID PANEL (Single Column Multi-Block layout) -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <!-- Machine Learning challenge awards -->
+        <div class="bg-[#0F0F12] border border-[#222227] rounded-[2.5rem] p-8 flex flex-col justify-between space-y-6 shadow-2xl" id="ml-awards">
+          <div class="space-y-5">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 bg-amber-500/10 border border-amber-500/20 rounded-lg flex items-center justify-center text-amber-400">
+                <i data-lucide="trophy" class="w-4.5 h-4.5"></i>
+              </div>
+              <h4 class="text-xl font-bold text-white tracking-tight">Machine Learning Challenges</h4>
+            </div>
+
+            <div class="space-y-4">
+              <div class="p-4 rounded-xl bg-white/2 border border-white/5">
+                <div class="flex items-start gap-2.5">
+                  <div class="w-2 h-2 rounded-full bg-amber-400 shrink-0 mt-1.5"></div>
+                  <div>
+                    <h5 class="text-sm font-bold text-white leading-snug">1st place in ChaLearn Explainable Job Candidate Screening challenge</h5>
+                    <p class="text-xs text-white/50 font-mono mt-1 leading-snug">IEEE Conference on Computer Vision and Pattern Recognition Workshops (CVPRW)</p>
+                    <span class="text-[10px] text-teal-400 font-mono font-bold block mt-1">2017 • FIRST PLACE</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-xl bg-white/2 border border-white/5">
+                <div class="flex items-start gap-2.5">
+                  <div class="w-2 h-2 rounded-full bg-amber-400 shrink-0 mt-1.5"></div>
+                  <div>
+                    <h5 class="text-sm font-bold text-white leading-snug">1st place in ChaLearn First Impressions challenge</h5>
+                    <p class="text-xs text-white/50 font-mono mt-1 leading-snug">International Conference on Pattern Recognition (ICPR)</p>
+                    <span class="text-[10px] text-teal-400 font-mono font-bold block mt-1">2016 • FIRST PLACE</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-xl bg-white/2 border border-white/5">
+                <div class="flex items-start gap-2.5">
+                  <div class="w-2 h-2 rounded-full bg-amber-400 shrink-0 mt-1.5"></div>
+                  <div>
+                    <h5 class="text-sm font-bold text-white leading-snug">2nd place in Emotion Recognition in the Wild (EmotiW) challenge</h5>
+                    <p class="text-xs text-white/50 font-mono mt-1 leading-snug">ACM International Conference on Multimodal Interaction (ICMI)</p>
+                    <span class="text-[10px] text-indigo-400 font-mono font-bold block mt-1">2015 • SECOND PLACE</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <span class="text-[10px] font-mono text-white/30 uppercase block pt-4 border-t border-white/5">
+            ChaLearn Computer Vision Benchmarks
+          </span>
+        </div>
+
+        <!-- Academic References -->
+        <div class="bg-[#0F0F12] border border-[#222227] rounded-[2.5rem] p-8 flex flex-col justify-between space-y-6 shadow-2xl" id="references">
+          <div class="space-y-5">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 bg-indigo-500/10 border border-indigo-500/20 rounded-lg flex items-center justify-center text-indigo-400">
+                <i data-lucide="user" class="w-4.5 h-4.5"></i>
+              </div>
+              <h4 class="text-xl font-bold text-white tracking-tight">Academic References</h4>
+            </div>
+
+            <div class="space-y-4">
+              <div class="p-4 rounded-xl bg-white/2 border border-white/5 flex flex-col justify-between">
+                <div>
+                  <h5 class="text-sm font-extrabold text-white">Prof. Dr. Albert Ali Salah</h5>
+                  <p class="text-xs text-white/40 font-mono mt-0.5">Utrecht University</p>
+                </div>
+                <div class="mt-2 pt-2 border-t border-white/5 flex justify-between items-center text-[10px] font-mono">
+                  <span class="text-white/30 uppercase">EMAIL CONTACT</span>
+                  <a href="mailto:a.a.salah@uu.nl" class="text-teal-400 hover:underline hover:text-teal-300 font-bold">a.a.salah@uu.nl</a>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-xl bg-white/2 border border-white/5 flex flex-col justify-between">
+                <div>
+                  <h5 class="text-sm font-extrabold text-white">Dr. Heysem Kaya</h5>
+                  <p class="text-xs text-white/40 font-mono mt-0.5">Utrecht University</p>
+                </div>
+                <div class="mt-2 pt-2 border-t border-white/5 flex justify-between items-center text-[10px] font-mono">
+                  <span class="text-white/30 uppercase">EMAIL CONTACT</span>
+                  <a href="mailto:h.kaya@uu.nl" class="text-teal-400 hover:underline hover:text-teal-300 font-bold">h.kaya@uu.nl</a>
+                </div>
+              </div>
+
+              <div class="p-4 rounded-xl bg-white/2 border border-white/5 flex flex-col justify-between">
+                <div>
+                  <h5 class="text-sm font-extrabold text-white">Prof. Dr. Çetin Yılmaz</h5>
+                  <p class="text-xs text-white/40 font-mono mt-0.5">Boğaziçi University</p>
+                </div>
+                <div class="mt-2 pt-2 border-t border-white/5 flex justify-between items-center text-[10px] font-mono">
+                  <span class="text-white/30 uppercase">EMAIL CONTACT</span>
+                  <a href="mailto:cetin.yilmaz@boun.edu.tr" class="text-teal-400 hover:underline hover:text-teal-300 font-bold">cetin.yilmaz@boun.edu.tr</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <span class="text-[10px] font-mono text-white/30 uppercase block pt-4 border-t border-white/5">
+            Boğaziçi & Utrecht University
+          </span>
+        </div>
+
+      </div>
+
+    </main>
+
+    <!-- Dynamic Wide Footer -->
+    <footer class="w-full max-w-5xl mx-auto mt-16 flex flex-col md:flex-row justify-between items-center gap-6 pt-8 border-t border-white/5 text-[10px] font-mono text-white/30 uppercase tracking-[0.2em] z-10">
+      <div>&copy; <span id="year-target">2026</span> Furkan Gürpınar Portfolio</div>
+      <div class="flex items-center gap-2">
+        <span>Designed with Intent</span>
+        <div class="w-1.5 h-1.5 rounded-full bg-teal-400"></div>
+        <span>Pure Static HTML/CSS/JS Active</span>
+      </div>
+      <div>No cell phone numbers included in UI</div>
+    </footer>
+
+    <!-- Interactive LaTeX-like CV Modal (Same pristine content) -->
+    <div id="cv-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
+      <div class="bg-[#0F0F12] border border-[#222227] rounded-[2.5rem] w-full max-w-4xl max-h-[85vh] flex flex-col overflow-hidden shadow-2xl relative">
+        
+        <!-- Modal Header -->
+        <div class="p-6 border-b border-white/5 flex justify-between items-center bg-white/2">
+          <div>
+            <h3 class="text-xl font-bold text-white flex items-center gap-2">
+              <i data-lucide="file-text" class="text-blue-500 w-5 h-5"></i>
+              <span>Digital Academic CV</span>
+            </h3>
+            <p class="text-xs text-teal-400 font-mono font-bold">LaTeX COMPRESSED FORMAT</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <button onclick="copyMarkdownCV()" class="p-2 hover:bg-white/5 rounded-lg border border-white/5 transition-all text-xs font-mono text-white/70 hover:text-white flex items-center gap-1.5" title="Copy Markdown Resume" id="copy-md-btn">
+              <i data-lucide="copy" class="w-4 h-4"></i>
+              <span id="copy-text">Copy MD</span>
+            </button>
+            <button onclick="window.print()" class="p-2 hover:bg-white/5 rounded-lg border border-white/5 transition-all text-xs font-mono text-white/70 hover:text-white flex items-center gap-1.5" title="Print CV">
+              <i data-lucide="printer" class="w-4 h-4 text-teal-400"></i>
+              <span>Print CV</span>
+            </button>
+            <button onclick="closeCVModal()" class="w-8 h-8 rounded-full hover:bg-white/5 flex items-center justify-center text-white/60 hover:text-white border border-white/5 transition-colors font-mono text-xs">
+              ✕
+            </button>
+          </div>
+        </div>
+
+        <!-- Scrollable Curriculum Vitae Content -->
+        <div class="p-8 overflow-y-auto flex-1 space-y-8 text-left text-white/80 print-content" id="printable-cv">
+          <!-- CV Header -->
+          <div class="border-b border-white/10 pb-6">
+            <h1 class="text-3xl font-extrabold text-white tracking-tight">Furkan Gürpınar</h1>
+            <p class="text-sm text-teal-400 font-mono mt-1">gurpinarfurkan@gmail.com • Istanbul, Turkey</p>
+          </div>
+
+          <!-- Education section -->
+          <div class="space-y-4">
+            <h3 class="text-xs font-bold uppercase tracking-widest text-indigo-400 font-mono">Education</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div class="bg-white/2 p-4 rounded-xl border border-white/5">
+                <span class="text-[10px] font-mono text-white/40 block mb-1">2014-2017</span>
+                <h4 class="text-sm font-bold text-white leading-tight">M.S. Computational Science & Engineering</h4>
+                <p class="text-xs text-white/60 mt-1">Boğaziçi University</p>
+              </div>
+              <div class="bg-white/2 p-4 rounded-xl border border-white/5">
+                <span class="text-[10px] font-mono text-white/40 block mb-1">2007-2012</span>
+                <h4 class="text-sm font-bold text-white leading-tight">B.S. Mechanical Engineering</h4>
+                <p class="text-xs text-white/60 mt-1">Boğaziçi University</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Academic Experience -->
+          <div class="space-y-4">
+            <h3 class="text-xs font-bold uppercase tracking-widest text-indigo-400 font-mono">Academic Experience</h3>
+            <div class="space-y-4">
+              <div class="space-y-2">
+                <div class="flex justify-between items-baseline">
+                  <h4 class="text-sm font-bold text-white">Researcher</h4>
+                  <span class="text-xs font-mono text-white/40">2014-2017</span>
+                </div>
+                <p class="text-xs text-teal-400 font-medium">Boğaziçi University Media Laboratory</p>
+                <ul class="list-disc pl-4 space-y-1 text-xs text-white/60">
+                  <li>Video and image based deep transfer learning for face analysis.</li>
+                  <li>Developed neural networks for high-impact emotion and personality expression recognition.</li>
+                </ul>
+              </div>
+
+              <div class="space-y-2">
+                <div class="flex justify-between items-baseline">
+                  <h4 class="text-sm font-bold text-white">Research & Teaching Assistant</h4>
+                  <span class="text-xs font-mono text-white/40">2014-2015</span>
+                </div>
+                <p class="text-xs text-teal-400 font-medium">Kadir Has University</p>
+                <ul class="list-disc pl-4 space-y-1 text-xs text-white/60">
+                  <li>Time series analysis for market prediction models.</li>
+                  <li>Support in teaching Competitive Intelligence and Discrete Mathematics lectures.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Work Experience -->
+          <div class="space-y-4">
+            <h3 class="text-xs font-bold uppercase tracking-widest text-indigo-400 font-mono">Work Experience</h3>
+            <div class="space-y-2">
+              <div class="flex justify-between items-baseline">
+                <h4 class="text-sm font-bold text-white">Freelance Software Developer</h4>
+                <span class="text-xs font-mono text-white/40">2010 - Present</span>
+              </div>
+              <p class="text-xs text-teal-400 font-medium">Independent</p>
+              <ul class="list-disc pl-4 space-y-1 text-xs text-white/60">
+                <li>Web design, full responsive client layout, and Search Engine Optimization (SEO).</li>
+                <li>Native Android app development (Java, Kotlin) with local database persistence.</li>
+                <li>Ethereum smart contracts architecture (Solidity, Web3.js) for secure dApps.</li>
+                <li>Real-time image processing systems for smart public transport applications.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Publication details -->
+          <div class="space-y-4">
+            <h3 class="text-xs font-bold uppercase tracking-widest text-indigo-400 font-mono">Publications Overview</h3>
+            <div class="space-y-2 text-xs text-white/60" id="cv-pub-target">
+              <!-- Inline listings for clean printing -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frontend Interactive Script -->
+    <script>
+      // Furkan's Full CV Publications Dataset
+      const publications = [
+        {
+          type: "Journal Paper",
+          authors: "H.J. Escalante, H. Kaya, A.A. Salah, S. Escalera, Y. Güçlütürk, U. Güçlü, X. Baró, I. Guyon, J.C.S.J. Junior, M. Madadi, S. Ayache, E. Viegas, F. Gürpınar, A. S. Wicaksana, C.C.S. Liem, M.A.J. Van Gerven, R.J. Van Lier",
+          title: "Modeling, recognizing, and explaining apparent personality from videos",
+          venue: "IEEE Transactions on Affective Computing",
+          year: 2020
+        },
+        {
+          type: "Journal Paper",
+          authors: "Kaya, H., F. Gürpınar, A.A. Salah",
+          title: "Video Based Emotion Recognition in the Wild using Deep Transfer Learning and Score Fusion",
+          venue: "Image and Vision Computing",
+          year: 2017
+        },
+        {
+          type: "Conference Paper",
+          authors: "Kaya H., F. Gürpınar, A.A. Salah",
+          title: "Multi-modal Score Fusion and Decision Trees for Explainable Automatic Job Candidate Screening from Video CVs",
+          venue: "IEEE Conf. on Computer Vision and Pattern Recognition Workshops (CVPRW)",
+          year: 2017
+        },
+        {
+          type: "Conference Paper",
+          authors: "Gürpınar, F., H. Kaya, A.A. Salah",
+          title: "Multimodal Fusion of Audio, Scene, and Face Features for First Impression Estimation",
+          venue: "International Conference on Pattern Recognition (ICPR)",
+          year: 2016
+        },
+        {
+          type: "Conference Paper",
+          authors: "Gürpınar, F., H. Kaya, A.A. Salah",
+          title: "Combining Deep Facial and Ambient Features for First Impression Estimation",
+          venue: "European Conference on Computer Vision Workshops (ECCVW)",
+          year: 2016
+        },
+        {
+          type: "Conference Paper",
+          authors: "Gürpınar, F., H. Kaya, H. Dibeklioğlu, A.A. Salah",
+          title: "Kernel ELM and CNN based Facial Age Estimation",
+          venue: "IEEE Conference on Computer Vision and Pattern Recognition Workshops",
+          year: 2016
+        },
+        {
+          type: "Conference Paper",
+          authors: "Kaya, H., F. Gürpınar, S. Afshar, A.A. Salah",
+          title: "Contrasting and Combining Least Squares Based Learners for Emotion Recognition in the Wild",
+          venue: "ACM International Conference on Multimodal Interaction (ICMI)",
+          year: 2015
+        },
+        {
+          type: "Conference Paper",
+          authors: "Gürpınar, F., H. Kaya, S. Afshar, H. Dibeklioğlu, A.A. Salah",
+          title: "Kernel ELM based Age Estimation",
+          venue: "Int. Conf. on Computer Graphics, Animation and Gaming Technologies (Eurasia Graphics), Istanbul",
+          year: 2015
+        },
+        {
+          type: "Book Chapter",
+          authors: "Dibeklioğlu, H., A.A. Salah, F. Gürpınar",
+          title: "Measurement of Facial Dynamics for Soft Biometrics",
+          venue: "Int. Workshop on Face and Facial Expression Recognition from Real World Videos, Springer Verlag",
+          year: 2015
+        }
+      ];
+
+      // Skill Books catalog
+      const skillBooks = [
+        {
+          title: "Web Frontend",
+          subtitle: "Interfaces & Client Applications",
+          spineColor: "from-blue-600 to-indigo-700",
+          textColor: "text-blue-400",
+          accentBg: "bg-blue-500/10",
+          borderAccent: "border-blue-500/20",
+          description: "Delivering fully responsive, lightweight frontend architectures and interactive dashboards since 2010.",
+          primaryTech: "React & Vue",
+          skills: ["JavaScript", "TypeScript", "React", "Vue", "jQuery", "AngularJS", "Tauri", "Electron", "NW.js"],
+          icon: "code-2"
+        },
+        {
+          title: "Backend Services",
+          subtitle: "Data & Cloud Architecture",
+          spineColor: "from-emerald-600 to-teal-700",
+          textColor: "text-emerald-400",
+          accentBg: "bg-emerald-500/10",
+          borderAccent: "border-emerald-500/20",
+          description: "Highly optimized backend infrastructures, API orchestration, and structured database layouts.",
+          primaryTech: "Node.js & Python",
+          skills: ["Node.js", "Python", "Django", "MongoDB", "SQL", "PHP", "Express", "RESTful APIs"],
+          icon: "database"
+        },
+        {
+          title: "Mobile Platforms",
+          subtitle: "Native App Development",
+          spineColor: "from-purple-600 to-violet-700",
+          textColor: "text-purple-400",
+          accentBg: "bg-purple-500/10",
+          borderAccent: "border-purple-500/20",
+          description: "Crafting fluid native mobile apps. Built and deployed custom face analysis and image processing utilities.",
+          primaryTech: "Android & iOS",
+          skills: ["Android (Java, Kotlin)", "iOS (Objective-C)", "Swift", "CoreML", "Camera APIs", "Device Performance"],
+          icon: "smartphone"
+        },
+        {
+          title: "Game & 3D Interactive",
+          subtitle: "Real-time Graphics Engine",
+          spineColor: "from-amber-600 to-orange-700",
+          textColor: "text-amber-400",
+          accentBg: "bg-amber-500/10",
+          borderAccent: "border-amber-500/20",
+          description: "Developing robust game logic and WebGL graphics engines for soft biometrics and facial dynamics.",
+          primaryTech: "Unity3D & WebGL",
+          skills: ["Unity3D", "Three.js", "Babylon.js", "Phaser.js", "ActionScript", "C# Game Logic", "GLSL Shaders"],
+          icon: "gamepad-2"
+        },
+        {
+          title: "Scientific Computing",
+          subtitle: "Analytical Systems & Models",
+          spineColor: "from-rose-600 to-pink-700",
+          textColor: "text-rose-400",
+          accentBg: "bg-rose-500/10",
+          borderAccent: "border-rose-500/20",
+          description: "Applying mechanical engineering and computer science principles to numerical analysis and face biometrics.",
+          primaryTech: "MATLAB & Julia",
+          skills: ["MATLAB", "R Studio", "Prolog", "Julia", "Numerical Analysis", "Time-Series Models", "Discrete Math"],
+          icon: "cpu"
+        },
+        {
+          title: "Smart Contracts",
+          subtitle: "Distributed Ledger Web3",
+          spineColor: "from-cyan-600 to-blue-700",
+          textColor: "text-cyan-400",
+          accentBg: "bg-cyan-500/10",
+          borderAccent: "border-cyan-500/20",
+          description: "Developing decentralized logic, smart contract architecture, and web integrations for Web3 platforms.",
+          primaryTech: "Solidity & Web3.js",
+          skills: ["Solidity", "Web3.js", "C++", "C#", "C Systems", "Ethereum EVM", "Visual Basic"],
+          icon: "layers"
+        }
+      ];
+
+      // Slidable State Variables
+      let activeBookIndex = 0;
+      let startX = 0;
+      let currentX = 0;
+      let isDragging = false;
+      const swipeThreshold = 55;
+
+      // Render Active Book Page
+      function renderActiveBook() {
+        const book = skillBooks[activeBookIndex];
+        
+        // 1. Update counters
+        document.getElementById("book-counter").textContent = `${String(activeBookIndex + 1).padStart(2, '0')} / ${String(skillBooks.length).padStart(2, '0')}`;
+        
+        // 2. Build Spine html
+        const spineTarget = document.getElementById("book-spine");
+        spineTarget.className = `w-6 sm:w-10 bg-gradient-to-r ${book.spineColor} border-r border-white/10 flex flex-col justify-between items-center py-6 relative shadow-inner shrink-0`;
+        spineTarget.innerHTML = `
+          <div class="space-y-4 w-full">
+            <div class="h-[2px] bg-black/40 w-full"></div>
+            <div class="h-[2px] bg-black/40 w-full"></div>
+            <div class="h-[2px] bg-black/40 w-full"></div>
+          </div>
+          <span class="text-[9px] font-mono font-bold tracking-[0.3em] text-white/50 -rotate-90 uppercase my-8 origin-center truncate w-24 block text-center">
+            ${book.primaryTech}
+          </span>
+          <div class="space-y-4 w-full">
+            <div class="h-[2px] bg-black/40 w-full"></div>
+            <div class="h-[2px] bg-black/40 w-full"></div>
+          </div>
+          <div class="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-amber-400/50"></div>
+          <div class="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-amber-400/50"></div>
+        `;
+
+        // 3. Build Cover details html
+        const coverTarget = document.getElementById("book-cover");
+        coverTarget.innerHTML = `
+          <!-- Subtle texture -->
+          <div class="absolute inset-0 opacity-[0.02] mix-blend-overlay pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"n\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.65\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23n)\"/%3E%3C/svg%3E')"></div>
+
+          <!-- Top meta row -->
+          <div class="flex justify-between items-start gap-4 z-10">
+            <div class="space-y-1">
+              <span class="text-[10px] font-mono text-teal-400 uppercase tracking-widest block font-bold">
+                PAGE ${activeBookIndex + 1} // TECH_PORTFOLIO
+              </span>
+              <h4 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-none">
+                ${book.title}
+              </h4>
+              <p class="text-xs text-white/40 font-mono mt-1">
+                ${book.subtitle}
+              </p>
+            </div>
+            <!-- Tactical Icon matching skill -->
+            <div class="p-2.5 bg-white/5 border border-white/5 rounded-xl shrink-0">
+              <i data-lucide="${book.icon}" class="w-8 h-8 text-teal-400"></i>
+            </div>
+          </div>
+
+          <!-- Deep descriptive narrative section -->
+          <div class="space-y-4 z-10">
+            <p class="text-sm text-white/70 leading-relaxed italic border-l-2 border-teal-500/30 pl-4">
+              "${book.description}"
+            </p>
+
+            <!-- Skills & Tools listed -->
+            <div class="space-y-2">
+              <p class="text-[10px] font-mono text-white/40 uppercase tracking-wider">Expertise & Tools</p>
+              <div class="flex flex-wrap gap-2">
+                ${book.skills.map(s => `
+                  <span class="px-2.5 py-1 bg-white/2 hover:bg-white/5 border border-white/5 rounded-md text-xs font-mono text-white/80 transition-colors">
+                    ${s}
+                  </span>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+
+          <!-- Page index footer -->
+          <div class="flex justify-between items-center text-[10px] font-mono text-white/30 border-t border-white/5 pt-4 z-10">
+            <span>BOĞAZİÇİ M.S. PORTFOLIO</span>
+            <span class="text-teal-400/80 font-bold">NEXT.js workflow ready</span>
+          </div>
+
+          <!-- Golden right corner indicators -->
+          <div class="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-amber-400/40"></div>
+          <div class="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-amber-400/40"></div>
+        `;
+
+        // 4. Update index indicators
+        const bulletsContainer = document.getElementById("bullets-container");
+        bulletsContainer.innerHTML = skillBooks.map((_, i) => `
+          <button onclick="setBookIndex(${i})" class="h-1.5 rounded-full transition-all ${i === activeBookIndex ? 'w-8 bg-teal-400' : 'w-2 bg-white/20 hover:bg-white/40'}" title="Jump to page ${i + 1}"></button>
+        `).join('');
+
+        // Re-compile icons
+        lucide.createIcons();
+      }
+
+      function setBookIndex(index) {
+        // Simple rotation exit-entrance effect
+        const card = document.getElementById("book-card-target");
+        card.style.transform = "rotateY(40deg) scale(0.9) translateX(-100px)";
+        card.style.opacity = "0";
+
+        setTimeout(() => {
+          activeBookIndex = index;
+          renderActiveBook();
+          card.style.transform = "rotateY(0deg) scale(1) translateX(0px)";
+          card.style.opacity = "1";
+        }, 220);
+      }
+
+      function nextBook() {
+        setBookIndex((activeBookIndex + 1) % skillBooks.length);
+      }
+
+      function prevBook() {
+        setBookIndex(activeBookIndex === 0 ? skillBooks.length - 1 : activeBookIndex - 1);
+      }
+
+      // Drag, Touch, & Mouse Event slider logic
+      const dragContainer = document.getElementById("drag-container");
+      const bookCard = document.getElementById("book-card-target");
+
+      function startDrag(e) {
+        isDragging = true;
+        startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        dragContainer.style.cursor = "grabbing";
+      }
+
+      function dragging(e) {
+        if (!isDragging) return;
+        currentX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        const diffX = currentX - startX;
+        
+        // Tilt active book slightly in 3D during active dragging
+        const rotationY = Math.max(-25, Math.min(25, -diffX / 8));
+        const translationX = Math.max(-120, Math.min(120, diffX));
+        bookCard.style.transform = `rotateY(${rotationY}deg) translateX(${translationX}px)`;
+      }
+
+      function endDrag() {
+        if (!isDragging) return;
+        isDragging = false;
+        dragContainer.style.cursor = "grab";
+        
+        const diffX = currentX - startX;
+        // Check swipe threshold
+        if (Math.abs(diffX) > swipeThreshold) {
+          if (diffX > 0) {
+            prevBook();
+          } else {
+            nextBook();
+          }
+        } else {
+          // Reset to straight layout with smooth spring back
+          bookCard.style.transform = "rotateY(0deg) translateX(0px)";
+        }
+        startX = 0;
+        currentX = 0;
+      }
+
+      dragContainer.addEventListener("mousedown", startDrag);
+      window.addEventListener("mousemove", dragging);
+      window.addEventListener("mouseup", endDrag);
+
+      dragContainer.addEventListener("touchstart", startDrag, { passive: true });
+      window.addEventListener("touchmove", dragging, { passive: true });
+      window.addEventListener("touchend", endDrag);
+
+      // Research Publications State & Filter
+      let currentPubFilter = 'all';
+      let pubSearchQuery = '';
+      let activeExpandedPubIdx = null;
+
+      function renderPublications() {
+        const target = document.getElementById("pub-list-target");
+        
+        // Filter elements
+        const filtered = publications.filter(p => {
+          const typeMatches = currentPubFilter === 'all' || p.type === currentPubFilter;
+          const textMatches = pubSearchQuery === '' || 
+            p.title.toLowerCase().includes(pubSearchQuery.toLowerCase()) ||
+            p.authors.toLowerCase().includes(pubSearchQuery.toLowerCase()) ||
+            p.venue.toLowerCase().includes(pubSearchQuery.toLowerCase());
+          return typeMatches && textMatches;
+        });
+
+        // Update count
+        document.getElementById("pub-count-display").textContent = `SHOWING ${filtered.length} OF ${publications.length} SCHOLARLY WORKS`;
+
+        if (filtered.length === 0) {
+          target.innerHTML = `
+            <p class="text-xs text-white/30 text-center py-10">No publications match your filter criteria.</p>
+          `;
+          return;
+        }
+
+        target.innerHTML = filtered.map((pub, idx) => {
+          const actualIndex = publications.indexOf(pub);
+          const isExpanded = activeExpandedPubIdx === actualIndex;
+          
+          let badgeColor = "bg-indigo-500/10 text-indigo-400 border border-indigo-500/20";
+          if (pub.type === "Journal Paper") {
+            badgeColor = "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20";
+          } else if (pub.type === "Book Chapter") {
+            badgeColor = "bg-amber-500/10 text-amber-400 border border-amber-500/20";
+          }
+
+          return `
+            <div 
+              onclick="togglePubDetails(${actualIndex})"
+              class="p-5 rounded-2xl border transition-all cursor-pointer text-left ${isExpanded ? 'bg-blue-600/10 border-blue-500/30 shadow-inner' : 'bg-white/2 border-white/5 hover:bg-white/5 hover:border-white/10'}"
+            >
+              <div class="flex justify-between items-start gap-4">
+                <div class="flex flex-wrap items-center gap-2">
+                  <span class="text-[9px] font-bold font-mono uppercase px-2.5 py-0.5 rounded-full ${badgeColor}">
+                    ${pub.type}
+                  </span>
+                  <span class="text-[11px] text-teal-400 font-mono font-semibold">${pub.venue.split(" ")[0]}</span>
+                </div>
+                <span class="text-xs text-white/30 font-mono">${pub.year}</span>
+              </div>
+              
+              <h4 class="text-sm md:text-base font-bold text-white mt-3 leading-snug">
+                "${pub.title}"
+              </h4>
+
+              <p class="text-xs text-white/50 font-mono mt-2 line-clamp-1">${pub.authors}</p>
+              
+              ${isExpanded ? `
+                <div class="mt-4 pt-4 border-t border-white/5 text-xs text-white/70 space-y-3">
+                  <p><strong>Complete Author List:</strong> <span class="text-white/80">${pub.authors}</span></p>
+                  <p><strong>Full Venue:</strong> <span class="text-blue-400 font-mono">${pub.venue}</span></p>
+                </div>
+              ` : `
+                <div class="text-[10px] text-blue-400 font-mono mt-2 flex items-center gap-1">
+                  <span>Click to expand details</span>
+                  <i data-lucide="arrow-right" class="w-3 h-3"></i>
+                </div>
+              `}
+            </div>
+          `;
+        }).join('');
+
+        // Also build inline CV publications view for pristine printing
+        const cvTarget = document.getElementById("cv-pub-target");
+        cvTarget.innerHTML = publications.map((pub, idx) => `
+          <div class="border-b border-white/5 pb-2 pt-2">
+            <span class="text-[10px] font-mono text-teal-400 uppercase font-bold">[${pub.type} • ${pub.year}]</span>
+            <p class="text-xs font-bold text-white">"${pub.title}"</p>
+            <p class="text-[10px] text-white/60 font-mono">${pub.authors}</p>
+            <p class="text-[10px] text-blue-400 font-mono">${pub.venue}</p>
+          </div>
+        `).join('');
+
+        // Compile icons
+        lucide.createIcons();
+      }
+
+      function togglePubDetails(idx) {
+        if (activeExpandedPubIdx === idx) {
+          activeExpandedPubIdx = null;
+        } else {
+          activeExpandedPubIdx = idx;
+        }
+        renderPublications();
+      }
+
+      function setPubFilter(type) {
+        currentPubFilter = type;
+        
+        // Update tab styling
+        const buttons = document.querySelectorAll("#pub-tabs button");
+        buttons.forEach(btn => {
+          if (
+            (type === 'all' && btn.textContent === 'ALL') ||
+            (type === 'Journal Paper' && btn.textContent === 'JOURNAL') ||
+            (type === 'Conference Paper' && btn.textContent === 'CONFERENCE') ||
+            (type === 'Book Chapter' && btn.textContent === 'BOOK')
+          ) {
+            btn.className = "px-3.5 py-1.5 rounded-full transition-all bg-blue-600 text-white shadow-md";
+          } else {
+            btn.className = "px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white";
+          }
+        });
+
+        renderPublications();
+      }
+
+      function handlePubSearch() {
+        pubSearchQuery = document.getElementById("pub-search").value;
+        renderPublications();
+      }
+
+      // Interactive Academic CV Modal controller
+      function openCVModal() {
+        document.getElementById("cv-modal").classList.remove("hidden");
+        document.body.style.overflow = "hidden"; // Disable back page scrolling
+      }
+
+      function closeCVModal() {
+        document.getElementById("cv-modal").classList.add("hidden");
+        document.body.style.overflow = "auto";
+      }
+
+      // Clipboard Action to Copy Markdown CV Format
+      function copyMarkdownCV() {
+        const mdText = `
+# Furkan Gürpınar
+Email: gurpinarfurkan@gmail.com
+Location: Istanbul, Turkey
+
+## Education
+- **M.S. Computational Science & Engineering** at Boğaziçi University (2014-2017)
+- **B.S. Mechanical Engineering** at Boğaziçi University (2007-2012)
+
+## Academic Experience
+### Researcher - Boğaziçi University Media Laboratory (2014-2017)
+- Video and image based deep transfer learning for face analysis.
+- Developed neural networks for high-impact emotion and personality expression recognition.
+
+### Research & Teaching Assistant - Kadir Has University (2014-2015)
+- Time series analysis for market prediction models.
+- Support in teaching Competitive Intelligence and Discrete Mathematics.
+
+### Teaching Assistant - Boğaziçi University Mechanical Engineering (2010)
+- Support in teaching MATLAB and C for numerical analysis.
+
+## Work Experience
+### Freelance Software Developer (2010 - Present)
+- Web design, development, and SEO optimization.
+- Native Android app development (Java, Kotlin).
+- Smart contract development on Ethereum blockchain (Solidity, Web3.js).
+- High-performance real-time image processing systems.
+
+## Publications
+${publications.map(p => `- **[${p.type}]** "${p.title}" - ${p.authors} (${p.venue}, ${p.year})`).join("\n")}
+
+## Awards
+- **1st place** in ChaLearn Explainable Job Candidate Screening challenge (CVPRW, 2017)
+- **1st place** in ChaLearn First Impressions challenge (ICPR, 2016)
+- **2nd place** in Emotion Recognition in the Wild (EmotiW) challenge (ICMI, 2015)
+        `;
+
+        navigator.clipboard.writeText(mdText.trim()).then(() => {
+          const btn = document.getElementById("copy-md-btn");
+          const copyText = document.getElementById("copy-text");
+          
+          btn.innerHTML = `<i data-lucide="check" class="w-4 h-4 text-emerald-400"></i><span class="text-emerald-400">Copied!</span>`;
+          lucide.createIcons();
+
+          setTimeout(() => {
+            btn.innerHTML = `<i data-lucide="copy" class="w-4 h-4"></i><span id="copy-text">Copy MD</span>`;
+            lucide.createIcons();
+          }, 2000);
+        });
+      }
+
+      // Initialize
+      window.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("year-target").textContent = new Date().getFullYear();
+        renderActiveBook();
+        renderPublications();
+        lucide.createIcons();
+      });
+    </script>
   </body>
 </html>
-

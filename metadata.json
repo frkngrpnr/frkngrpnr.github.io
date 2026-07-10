@@ -1,6 +1,6 @@
 {
   "name": "Hello World Portfolio Starter",
-  "description": "A visually polished Hello World starter app for a developer's personal portfolio landing page.",
+  "description": "An interactive, single-column premium dark mode portfolio featuring a slidable 3D book library, peer-reviewed publications search, and a print-ready LaTeX academic CV.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
