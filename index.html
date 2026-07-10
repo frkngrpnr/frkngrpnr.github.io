@@ -52,6 +52,8 @@
       }
       .book-card {
         transform-style: preserve-3d;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
         transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
         user-select: none;
         -webkit-user-select: none;
@@ -168,125 +170,59 @@
         </div>
       </section>
 
-      <!-- 2. THE 3D BOOK SKILL LIBRARY (Slidable single-column page catalog) -->
-      <section class="bg-[#0F0F12] border border-[#222227] rounded-[2.5rem] p-8 md:p-12 flex flex-col space-y-8 relative overflow-hidden shadow-2xl" id="3d-library-panel">
+      <!-- 2. SKILLS SHOWCASE PANEL (Grid of software toolcards) -->
+      <section class="bg-[#0F0F12] border border-[#222227] rounded-[2.5rem] p-8 md:p-12 flex flex-col space-y-8 relative overflow-hidden shadow-2xl" id="skills-panel">
         <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div class="space-y-1">
             <div class="flex items-center gap-2">
               <div class="w-8 h-8 bg-blue-500/10 border border-blue-500/20 rounded-lg flex items-center justify-center text-blue-400">
-                <i data-lucide="book-open" class="w-4 h-4"></i>
+                <i data-lucide="layout-grid" class="w-4 h-4"></i>
               </div>
-              <h3 class="text-2xl font-extrabold text-white tracking-tight">Skills</h3>
+              <h3 class="text-2xl font-extrabold text-white tracking-tight">Skills & Technologies</h3>
             </div>
             <p class="text-sm text-white/50">
-              Furkan's core expertise bound in a tactile sliding book catalog. Touch/drag or swipe left/right to flip pages.
+              A comprehensive selection of languages, frameworks, databases, and environments Furkan leverages to build high-performance products.
             </p>
           </div>
-
-          <!-- Slider Navigation Arrows & Counters -->
-          <div class="flex items-center gap-4 bg-white/5 px-4 py-2 rounded-full border border-white/5 self-end md:self-auto font-mono text-sm">
-            <button onclick="prevBook()" class="p-1.5 hover:bg-white/5 rounded-full transition-all text-white/60 hover:text-white active:scale-90" title="Previous page">
-              <i data-lucide="chevron-left" class="w-5 h-5"></i>
-            </button>
-            <span id="book-counter" class="text-xs text-teal-400 font-bold tracking-widest">01 / 06</span>
-            <button onclick="nextBook()" class="p-1.5 hover:bg-white/5 rounded-full transition-all text-white/60 hover:text-white active:scale-90" title="Next page">
-              <i data-lucide="chevron-right" class="w-5 h-5"></i>
-            </button>
+          
+          <!-- Category Quick Filter Tabs -->
+          <div class="flex flex-wrap gap-1 bg-white/5 p-1 rounded-full border border-white/5 text-xs font-semibold" id="skills-filter-tabs">
+            <button onclick="filterSkills('all')" class="skill-tab-btn px-3.5 py-1.5 rounded-full transition-all bg-blue-600 text-white shadow-md">ALL</button>
+            <button onclick="filterSkills('frontend')" class="skill-tab-btn px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white">FRONTEND</button>
+            <button onclick="filterSkills('backend')" class="skill-tab-btn px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white">BACKEND</button>
+            <button onclick="filterSkills('mobile')" class="skill-tab-btn px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white">MOBILE</button>
+            <button onclick="filterSkills('specialized')" class="skill-tab-btn px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white">3D & WEB3</button>
           </div>
         </div>
 
-        <!-- Touch/Mouse Slidable Book Stage -->
-        <div class="relative min-h-[420px] sm:min-h-[380px] md:min-h-[440px] flex items-center justify-center py-6 select-none overflow-hidden" id="slider-stage">
+        <!-- Touch/Mouse Slidable Skills 3D Carousel Stage -->
+        <div class="relative min-h-[350px] sm:min-h-[380px] md:min-h-[400px] flex items-center justify-center py-6 select-none overflow-hidden cursor-grab active:cursor-grabbing" id="skills-stage">
           
           <div class="absolute top-0 right-2 flex items-center gap-1.5 text-[10px] font-mono text-white/30 bg-white/5 px-2.5 py-1 rounded-md z-20">
             <i data-lucide="sparkles" class="w-3.5 h-3.5 animate-pulse text-amber-400"></i>
-            <span>DRAG BOOK COVER TO SLIDE PAGES</span>
+            <span>DRAG OR SWIPE TO ROTATE SKILLS</span>
           </div>
 
-          <!-- 3D Book Slide wrapper -->
-          <div class="book-container w-full max-w-2xl flex items-center justify-center relative cursor-grab active:cursor-grabbing" id="drag-container">
-            
-            <!-- Previous Book Background Card -->
-            <div id="book-card-prev" class="book-card absolute w-full bg-gradient-to-b from-[#15151a] to-[#101012] border border-[#2d2d35]/40 rounded-r-[1.5rem] rounded-l-[0.5rem] shadow-lg overflow-hidden flex flex-col sm:flex-row -z-30 pointer-events-none transition-all duration-300 ease-out origin-right" style="transform: translateX(-35%) scale(0.78) rotateY(32deg); opacity: 0.22;"></div>
+          <!-- Floating Left & Right Navigation Arrows -->
+          <button onclick="prevSkill(); event.stopPropagation();" class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black/60 hover:bg-blue-500/95 border border-white/10 hover:border-blue-400 text-white/70 hover:text-white flex items-center justify-center transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md z-30 active:scale-95 group" title="Previous skill">
+            <i data-lucide="chevron-left" class="w-5 h-5 sm:w-6 sm:h-6 text-blue-400 group-hover:text-white transition-colors"></i>
+          </button>
+          
+          <button onclick="nextSkill(); event.stopPropagation();" class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black/60 hover:bg-blue-500/95 border border-white/10 hover:border-blue-400 text-white/70 hover:text-white flex items-center justify-center transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md z-30 active:scale-95 group" title="Next skill">
+            <i data-lucide="chevron-right" class="w-5 h-5 sm:w-6 sm:h-6 text-blue-400 group-hover:text-white transition-colors"></i>
+          </button>
 
-            <!-- Next Book Background Card -->
-            <div id="book-card-next" class="book-card absolute w-full bg-gradient-to-b from-[#15151a] to-[#101012] border border-[#2d2d35]/40 rounded-r-[1.5rem] rounded-l-[0.5rem] shadow-lg overflow-hidden flex flex-col sm:flex-row -z-30 pointer-events-none transition-all duration-300 ease-out origin-left" style="transform: translateX(35%) scale(0.78) rotateY(-32deg); opacity: 0.22;"></div>
-
-            <!-- Book content render mount -->
-            <div id="book-card-target" class="book-card w-full bg-gradient-to-b from-[#15151a] to-[#101012] border border-[#2d2d35]/60 rounded-r-[1.5rem] rounded-l-[0.5rem] shadow-[25px_25px_50px_-10px_rgba(0,0,0,0.8)] overflow-hidden flex flex-col sm:flex-row relative transform-gpu z-10">
-              <!-- Spine section (populated dynamically) -->
-              <div id="book-spine" class="w-6 sm:w-10 bg-gradient-to-r from-blue-600 to-indigo-700 border-r border-white/10 flex flex-col justify-between items-center py-6 relative shadow-inner shrink-0"></div>
-              <!-- Page contents (populated dynamically) -->
-              <div id="book-cover" class="flex-1 p-8 sm:p-10 flex flex-col justify-between space-y-6 relative"></div>
-            </div>
-
-            <!-- Multi-page stack visuals under the active page to give realistic depth -->
-            <div class="absolute w-[95%] h-[95%] bg-[#0f0f12]/90 border border-[#2d2d35]/30 rounded-r-[1.5rem] shadow-lg translate-x-1.5 translate-y-1.5 -z-10 scale-[0.99] pointer-events-none"></div>
-            <div class="absolute w-[91%] h-[90%] bg-[#0c0c0e]/80 border border-[#2d2d35]/20 rounded-r-[1.5rem] shadow-md translate-x-3 translate-y-3 -z-20 scale-[0.97] pointer-events-none"></div>
+          <!-- 3D Carousel Stage with perspective -->
+          <div class="relative w-full max-w-4xl flex items-center justify-center h-[260px] md:h-[300px]" style="perspective: 1200px; transform-style: preserve-3d;" id="skills-carousel-container">
+            <!-- Populated dynamically with cards placed in 3D -->
           </div>
         </div>
 
         <!-- Bottom Page Bullet indicators -->
-        <div class="flex justify-center items-center gap-2" id="bullets-container"></div>
+        <div class="flex justify-center items-center gap-2" id="skills-bullets-container"></div>
       </section>
 
-      <!-- 3. RESEARCH PUBLICATIONS PANEL (Single Column Wide Layout) -->
-      <section class="bg-[#0F0F12] border border-[#222227] rounded-[2.5rem] p-8 md:p-12 flex flex-col space-y-6 shadow-2xl" id="publications-panel">
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-          <div class="space-y-1">
-            <div class="flex items-center gap-2">
-              <div class="w-8 h-8 bg-amber-500/10 border border-amber-500/20 rounded-lg flex items-center justify-center text-amber-400">
-                <i data-lucide="award" class="w-4 h-4"></i>
-              </div>
-              <h3 class="text-2xl font-extrabold text-white tracking-tight">Peer-Reviewed Publications</h3>
-            </div>
-            <p class="text-sm text-white/50">
-              Peer-reviewed papers in major venues including IEEE Transactions, CVPRW, ICPR, and Springer.
-            </p>
-          </div>
-
-          <!-- Filter Tabs -->
-          <div class="flex gap-1 bg-white/5 p-1 rounded-full border border-white/5 text-xs font-semibold self-start md:self-auto" id="pub-tabs">
-            <button onclick="setPubFilter('all')" class="tab-btn px-3.5 py-1.5 rounded-full transition-all bg-blue-600 text-white shadow-md">ALL</button>
-            <button onclick="setPubFilter('Journal Paper')" class="tab-btn px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white">JOURNAL</button>
-            <button onclick="setPubFilter('Conference Paper')" class="tab-btn px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white">CONFERENCE</button>
-            <button onclick="setPubFilter('Book Chapter')" class="tab-btn px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white">BOOK</button>
-          </div>
-        </div>
-
-        <!-- Search Input -->
-        <div class="relative">
-          <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-white/30"></i>
-          <input
-            id="pub-search"
-            type="text"
-            placeholder="Filter by publication title, venue, authors, or keyword..."
-            oninput="handlePubSearch()"
-            class="w-full pl-11 pr-4 py-3 bg-white/2 border border-white/5 hover:border-white/10 focus:border-blue-500 focus:bg-[#121215] rounded-xl text-sm text-white placeholder-white/30 transition-all outline-none font-mono"
-          />
-        </div>
-
-        <!-- Scrollable list of publications -->
-        <div class="space-y-3 max-h-[380px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-white/15" id="pub-list-target">
-          <!-- Populated dynamically -->
-        </div>
-
-        <!-- Publication stats and Google Scholar link -->
-        <div class="flex flex-col sm:flex-row justify-between items-center text-[10px] font-mono text-white/30 pt-4 border-t border-white/5 gap-3">
-          <span id="pub-count-display">SHOWING 9 OF 9 SCHOLARLY WORKS</span>
-          <a 
-            href="https://scholar.google.com/scholar?q=Furkan+G%C3%BCrp%C4%B1nar" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="hover:text-blue-400 flex items-center gap-1 transition-colors hover:underline text-teal-400 font-bold"
-          >
-            <span>EXPLORE ON GOOGLE SCHOLAR</span>
-            <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
-          </a>
-        </div>
-      </section>
-
-      <!-- 4. WORK & ACADEMIC EXPERIENCES (Unified Single Column Timeline) -->
+      <!-- 3. WORK & ACADEMIC EXPERIENCES (Unified Single Column Timeline) -->
       <section class="bg-[#0F0F12] border border-[#222227] rounded-[2.5rem] p-8 md:p-12 flex flex-col space-y-8 shadow-2xl" id="timeline-panel">
         <div class="space-y-1">
           <div class="flex items-center gap-2">
@@ -372,6 +308,62 @@
             </div>
           </div>
 
+        </div>
+      </section>
+
+      <!-- 4. RESEARCH PUBLICATIONS PANEL (Single Column Wide Layout) -->
+      <section class="bg-[#0F0F12] border border-[#222227] rounded-[2.5rem] p-8 md:p-12 flex flex-col space-y-6 shadow-2xl" id="publications-panel">
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <div class="w-8 h-8 bg-amber-500/10 border border-amber-500/20 rounded-lg flex items-center justify-center text-amber-400">
+                <i data-lucide="award" class="w-4 h-4"></i>
+              </div>
+              <h3 class="text-2xl font-extrabold text-white tracking-tight">Peer-Reviewed Publications</h3>
+            </div>
+            <p class="text-sm text-white/50">
+              Peer-reviewed papers in major venues including IEEE Transactions, CVPRW, ICPR, and Springer.
+            </p>
+          </div>
+
+          <!-- Filter Tabs -->
+          <div class="flex gap-1 bg-white/5 p-1 rounded-full border border-white/5 text-xs font-semibold self-start md:self-auto" id="pub-tabs">
+            <button onclick="setPubFilter('all')" class="tab-btn px-3.5 py-1.5 rounded-full transition-all bg-blue-600 text-white shadow-md">ALL</button>
+            <button onclick="setPubFilter('Journal Paper')" class="tab-btn px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white">JOURNAL</button>
+            <button onclick="setPubFilter('Conference Paper')" class="tab-btn px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white">CONFERENCE</button>
+            <button onclick="setPubFilter('Book Chapter')" class="tab-btn px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white">BOOK</button>
+          </div>
+        </div>
+
+        <!-- Search Input -->
+        <div class="relative">
+          <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-4.5 h-4.5 text-white/30"></i>
+          <input
+            id="pub-search"
+            type="text"
+            placeholder="Filter by publication title, venue, authors, or keyword..."
+            oninput="handlePubSearch()"
+            class="w-full pl-11 pr-4 py-3 bg-[#131317] border border-white/10 hover:border-white/20 focus:border-blue-500 focus:bg-[#0c0c0e] rounded-xl text-sm text-white placeholder-white/30 transition-all outline-none font-mono shadow-inner"
+          />
+        </div>
+
+        <!-- Scrollable list of publications -->
+        <div class="space-y-3 max-h-[380px] overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-white/15" id="pub-list-target">
+          <!-- Populated dynamically -->
+        </div>
+
+        <!-- Publication stats and Google Scholar link -->
+        <div class="flex flex-col sm:flex-row justify-between items-center text-[10px] font-mono text-white/30 pt-4 border-t border-white/5 gap-3">
+          <span id="pub-count-display">SHOWING 9 OF 9 SCHOLARLY WORKS</span>
+          <a 
+            href="https://scholar.google.com/scholar?q=Furkan+G%C3%BCrp%C4%B1nar" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="hover:text-blue-400 flex items-center gap-1 transition-colors hover:underline text-teal-400 font-bold"
+          >
+            <span>EXPLORE ON GOOGLE SCHOLAR</span>
+            <i data-lucide="arrow-up-right" class="w-3.5 h-3.5"></i>
+          </a>
         </div>
       </section>
 
@@ -676,360 +668,282 @@
         }
       ];
 
-      // Skill Books catalog
-      const skillBooks = [
-        {
-          title: "Web Frontend",
-          subtitle: "Interfaces & Client Applications",
-          spineColor: "from-blue-600 to-indigo-700",
-          textColor: "text-blue-400",
-          accentBg: "bg-blue-500/10",
-          borderAccent: "border-blue-500/20",
-          description: "Delivering fully responsive, lightweight frontend architectures and interactive dashboards since 2010.",
-          primaryTech: "React & Vue",
-          skills: ["JavaScript", "TypeScript", "React", "Vue", "jQuery", "AngularJS", "Tauri", "Electron", "NW.js"],
-          icon: "code-2"
-        },
-        {
-          title: "Backend Services",
-          subtitle: "Data & Cloud Architecture",
-          spineColor: "from-emerald-600 to-teal-700",
-          textColor: "text-emerald-400",
-          accentBg: "bg-emerald-500/10",
-          borderAccent: "border-emerald-500/20",
-          description: "Highly optimized backend infrastructures, API orchestration, and structured database layouts.",
-          primaryTech: "Node.js & Python",
-          skills: ["Node.js", "Python", "Django", "MongoDB", "SQL", "PHP", "Express", "RESTful APIs"],
-          icon: "database"
-        },
-        {
-          title: "Mobile Platforms",
-          subtitle: "Native App Development",
-          spineColor: "from-purple-600 to-violet-700",
-          textColor: "text-purple-400",
-          accentBg: "bg-purple-500/10",
-          borderAccent: "border-purple-500/20",
-          description: "Crafting fluid native mobile apps. Built and deployed custom face analysis and image processing utilities.",
-          primaryTech: "Android & iOS",
-          skills: ["Android (Java, Kotlin)", "iOS (Objective-C)", "Swift", "CoreML", "Camera APIs", "Device Performance"],
-          icon: "smartphone"
-        },
-        {
-          title: "Game & 3D Interactive",
-          subtitle: "Real-time Graphics Engine",
-          spineColor: "from-amber-600 to-orange-700",
-          textColor: "text-amber-400",
-          accentBg: "bg-amber-500/10",
-          borderAccent: "border-amber-500/20",
-          description: "Developing robust game logic and WebGL graphics engines for soft biometrics and facial dynamics.",
-          primaryTech: "Unity3D & WebGL",
-          skills: ["Unity3D", "Three.js", "Babylon.js", "Phaser.js", "ActionScript", "C# Game Logic", "GLSL Shaders"],
-          icon: "gamepad-2"
-        },
-        {
-          title: "Scientific Computing",
-          subtitle: "Analytical Systems & Models",
-          spineColor: "from-rose-600 to-pink-700",
-          textColor: "text-rose-400",
-          accentBg: "bg-rose-500/10",
-          borderAccent: "border-rose-500/20",
-          description: "Applying mechanical engineering and computer science principles to numerical analysis and face biometrics.",
-          primaryTech: "MATLAB & Julia",
-          skills: ["MATLAB", "R Studio", "Prolog", "Julia", "Numerical Analysis", "Time-Series Models", "Discrete Math"],
-          icon: "cpu"
-        },
-        {
-          title: "Smart Contracts",
-          subtitle: "Distributed Ledger Web3",
-          spineColor: "from-cyan-600 to-blue-700",
-          textColor: "text-cyan-400",
-          accentBg: "bg-cyan-500/10",
-          borderAccent: "border-cyan-500/20",
-          description: "Developing decentralized logic, smart contract architecture, and web integrations for Web3 platforms.",
-          primaryTech: "Solidity & Web3.js",
-          skills: ["Solidity", "Web3.js", "C++", "C#", "C Systems", "Ethereum EVM", "Visual Basic"],
-          icon: "layers"
-        }
+      // Skills Data Catalog
+      const skillsData = [
+        { name: "JavaScript", logo: "javascript.png", category: "frontend", icon: "code", color: "from-amber-500/10 to-yellow-500/5", border: "border-amber-500/20", text: "text-amber-400" },
+        { name: "TypeScript", logo: "typescript.png", category: "frontend", icon: "braces", color: "from-blue-500/10 to-indigo-500/5", border: "border-blue-500/20", text: "text-blue-400" },
+        { name: "React", logo: "react.png", category: "frontend", icon: "atom", color: "from-sky-500/10 to-blue-500/5", border: "border-sky-500/20", text: "text-sky-400" },
+        { name: "Vue", logo: "vue.png", category: "frontend", icon: "layers", color: "from-emerald-500/10 to-teal-500/5", border: "border-emerald-500/20", text: "text-emerald-400" },
+        { name: "Node.js", logo: "nodejs.png", category: "backend", icon: "server", color: "from-green-500/10 to-emerald-500/5", border: "border-green-500/20", text: "text-green-400" },
+        { name: "Python", logo: "python.png", category: "backend", icon: "terminal", color: "from-yellow-500/10 to-blue-500/5", border: "border-yellow-500/20", text: "text-blue-400" },
+        { name: "MongoDB", logo: "mongodb.png", category: "backend", icon: "database", color: "from-emerald-600/10 to-green-600/5", border: "border-emerald-500/20", text: "text-emerald-400" },
+        { name: "SQL Databases", logo: "sql.png", category: "backend", icon: "table", color: "from-blue-600/10 to-sky-600/5", border: "border-blue-500/20", text: "text-blue-400" },
+        { name: "Android", logo: "android.png", category: "mobile", icon: "smartphone", color: "from-green-400/10 to-emerald-400/5", border: "border-green-400/20", text: "text-green-400" },
+        { name: "iOS Swift", logo: "ios.png", category: "mobile", icon: "tablet", color: "from-slate-400/10 to-zinc-400/5", border: "border-slate-500/20", text: "text-slate-300" },
+        { name: "Unity3D", logo: "unity.png", category: "specialized", icon: "gamepad-2", color: "from-stone-500/10 to-neutral-500/5", border: "border-stone-500/20", text: "text-stone-300" },
+        { name: "Solidity", logo: "solidity.png", category: "specialized", icon: "shield", color: "from-violet-500/10 to-purple-500/5", border: "border-violet-500/20", text: "text-violet-400" },
+        { name: "MATLAB", logo: "matlab.png", category: "specialized", icon: "binary", color: "from-rose-500/10 to-orange-500/5", border: "border-rose-500/20", text: "text-rose-400" },
+        { name: "Three.js", logo: "threejs.png", category: "specialized", icon: "box", color: "from-teal-500/10 to-cyan-500/5", border: "border-teal-500/20", text: "text-teal-400" },
+        { name: "C / C++", logo: "cpp.png", category: "specialized", icon: "cpu", color: "from-indigo-500/10 to-blue-500/5", border: "border-indigo-500/20", text: "text-indigo-400" },
+        { name: "C#", logo: "cpp.png", category: "specialized", icon: "cpu", color: "from-indigo-500/10 to-blue-500/5", border: "border-indigo-500/20", text: "text-indigo-400" },
+        { name: "Web3.js", logo: "web3.png", category: "specialized", icon: "link", color: "from-pink-500/10 to-rose-500/5", border: "border-pink-500/20", text: "text-pink-400" }
       ];
 
-      // Slidable State Variables
-      let activeBookIndex = 0;
-      let startX = 0;
-      let currentX = 0;
-      let isDragging = false;
-      const swipeThreshold = 55;
+      // Skills Showcase 3D Carousel state variables
+      let currentFilteredSkills = [];
+      let activeSkillIndex = 0;
+      let skillStartX = 0;
+      let skillCurrentX = 0;
+      let skillIsDragging = false;
+      const skillSwipeThreshold = 35;
 
-      // Single unified book inner HTML builder
-      function buildBookInnerHTML(book, index) {
-        return `
-          <!-- Spine section -->
-          <div class="w-6 sm:w-10 bg-gradient-to-r ${book.spineColor} border-r border-white/10 flex flex-col justify-between items-center py-6 relative shadow-inner shrink-0">
-            <div class="space-y-4 w-full">
-              <div class="h-[2px] bg-black/40 w-full"></div>
-              <div class="h-[2px] bg-black/40 w-full"></div>
-              <div class="h-[2px] bg-black/40 w-full"></div>
-            </div>
-            <span class="text-[9px] font-mono font-bold tracking-[0.3em] text-white/50 -rotate-90 uppercase my-8 origin-center truncate w-24 block text-center">
-              ${book.primaryTech}
-            </span>
-            <div class="space-y-4 w-full">
-              <div class="h-[2px] bg-black/40 w-full"></div>
-              <div class="h-[2px] bg-black/40 w-full"></div>
-            </div>
-            <div class="absolute top-0 left-0 w-3 h-3 border-t-2 border-l-2 border-amber-400/50"></div>
-            <div class="absolute bottom-0 left-0 w-3 h-3 border-b-2 border-l-2 border-amber-400/50"></div>
-          </div>
-          <!-- Page contents -->
-          <div class="flex-1 p-8 sm:p-10 flex flex-col justify-between space-y-6 relative overflow-hidden">
-            <!-- Subtle texture -->
-            <div class="absolute inset-0 opacity-[0.02] mix-blend-overlay pointer-events-none" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"n\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.65\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23n)\"/%3E%3C/svg%3E')"></div>
+      // Render Skills Showcase 3D Carousel
+      function renderSkills(filter = 'all') {
+        const container = document.getElementById("skills-carousel-container");
+        if (!container) return;
 
-            <!-- Top meta row -->
-            <div class="flex justify-between items-start gap-4 z-10">
-              <div class="space-y-1 text-left">
-                <span class="text-[10px] font-mono text-teal-400 uppercase tracking-widest block font-bold">
-                  PAGE ${index + 1} // TECH_PORTFOLIO
-                </span>
-                <h4 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight leading-none">
-                  ${book.title}
-                </h4>
-                <p class="text-xs text-white/40 font-mono mt-1">
-                  ${book.subtitle}
-                </p>
-              </div>
-              <!-- Tactical Icon matching skill -->
-              <div class="p-2.5 bg-white/5 border border-white/5 rounded-xl shrink-0">
-                <i data-lucide="${book.icon}" class="w-8 h-8 text-teal-400"></i>
-              </div>
-            </div>
+        currentFilteredSkills = skillsData.filter(s => filter === 'all' || s.category === filter);
+        activeSkillIndex = 0; // Reset to first card on filter change
 
-            <!-- Deep descriptive narrative section text-left -->
-            <div class="space-y-4 z-10 text-left">
-              <p class="text-sm text-white/70 leading-relaxed italic border-l-2 border-teal-500/30 pl-4">
-                "${book.description}"
-              </p>
-
-              <!-- Skills & Tools listed -->
-              <div class="space-y-2">
-                <p class="text-[10px] font-mono text-white/40 uppercase tracking-wider">Expertise & Tools</p>
-                <div class="flex flex-wrap gap-2">
-                  ${book.skills.map(s => `
-                    <span class="px-2.5 py-1 bg-white/2 hover:bg-white/5 border border-white/5 rounded-md text-xs font-mono text-white/80 transition-colors">
-                      ${s}
-                    </span>
-                  `).join('')}
+        // Generate absolute positioned 3D cards
+        container.innerHTML = currentFilteredSkills.map((skill, idx) => {
+          return `
+            <div 
+              onclick="setSkillIndex(${idx})"
+              class="skill-carousel-card absolute bg-[#131318] border border-[#2d2d35]/50 rounded-[1.5rem] p-6 flex flex-col items-center justify-center text-center space-y-4 shadow-[0_10px_35px_rgba(0,0,0,0.6)] transition-all duration-500 ease-out group overflow-hidden select-none"
+              style="width: var(--card-width, 190px); height: var(--card-height, 220px); transform-style: preserve-3d; backface-visibility: hidden; will-change: transform, opacity; cursor: grab;"
+              data-index="${idx}"
+            >
+              <!-- Glossy background glow -->
+              <div class="absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+              
+              <!-- Logo Image Container with dynamic SVG fallback -->
+              <div class="w-14 h-14 rounded-2xl bg-white/[0.02] border border-white/5 flex items-center justify-center p-2.5 relative group-hover:scale-110 transition-transform duration-300 shrink-0 z-10">
+                <img 
+                  src="/public/logos/${skill.logo}" 
+                  alt="${skill.name}" 
+                  class="w-full h-full object-contain filter drop-shadow-md" 
+                  onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
+                />
+                <!-- Modern Minimal Placeholder Logo fallback -->
+                <div class="hidden absolute inset-0 flex items-center justify-center rounded-2xl bg-gradient-to-br ${skill.color} border ${skill.border}">
+                  <i data-lucide="${skill.icon}" class="w-7 h-7 ${skill.text}"></i>
                 </div>
               </div>
+              
+              <!-- Skill Name and Area Label -->
+              <div class="space-y-1 z-10">
+                <span class="text-sm font-bold text-white group-hover:text-blue-400 transition-colors tracking-tight block">
+                  ${skill.name}
+                </span>
+                <span class="text-[9px] font-mono uppercase tracking-widest text-white/40 group-hover:text-white transition-colors block">
+                  ${skill.category}
+                </span>
+              </div>
             </div>
+          `;
+        }).join('');
 
-            <!-- Page index footer -->
-            <div class="flex justify-between items-center text-[10px] font-mono text-white/30 border-t border-white/5 pt-4 z-10">
-              <span>BOĞAZİÇİ M.S. PORTFOLIO</span>
-              <span class="text-teal-400/80 font-bold">NEXT.js workflow ready</span>
-            </div>
-
-            <!-- Golden right corner indicators -->
-            <div class="absolute top-0 right-0 w-3 h-3 border-t-2 border-r-2 border-amber-400/40"></div>
-            <div class="absolute bottom-0 right-0 w-3 h-3 border-b-2 border-r-2 border-amber-400/40"></div>
-          </div>
-        `;
-      }
-
-      // Render Active Book Page & Side stacks
-      function renderActiveBook() {
-        const book = skillBooks[activeBookIndex];
-        const prevIndex = (activeBookIndex - 1 + skillBooks.length) % skillBooks.length;
-        const nextIndex = (activeBookIndex + 1) % skillBooks.length;
-        
-        // 1. Update counters
-        document.getElementById("book-counter").textContent = `${String(activeBookIndex + 1).padStart(2, '0')} / ${String(skillBooks.length).padStart(2, '0')}`;
-        
-        // 2. Build the main active cover
-        const activeCard = document.getElementById("book-card-target");
-        activeCard.innerHTML = buildBookInnerHTML(book, activeBookIndex);
-
-        // 3. Build Previous and Next background preview covers
-        const prevCard = document.getElementById("book-card-prev");
-        const nextCard = document.getElementById("book-card-next");
-
-        prevCard.innerHTML = buildBookInnerHTML(skillBooks[prevIndex], prevIndex);
-        nextCard.innerHTML = buildBookInnerHTML(skillBooks[nextIndex], nextIndex);
-
-        // Position background cards responsively
+        // Apply first layout and initialize spacing responsive styles
         const isMobile = window.innerWidth < 640;
-        const offsetPercent = isMobile ? 18 : 35;
-        const scaleVal = isMobile ? 0.72 : 0.78;
-        const rotateVal = isMobile ? 22 : 32;
-        const opacityVal = isMobile ? 0.15 : 0.25;
+        container.style.setProperty('--card-width', isMobile ? '150px' : '190px');
+        container.style.setProperty('--card-height', isMobile ? '170px' : '210px');
 
-        prevCard.style.transform = `translateX(-${offsetPercent}%) scale(${scaleVal}) rotateY(${rotateVal}deg)`;
-        prevCard.style.opacity = opacityVal;
+        updateSkillsCarouselTransforms();
 
-        nextCard.style.transform = `translateX(${offsetPercent}%) scale(${scaleVal}) rotateY(-${rotateVal}deg)`;
-        nextCard.style.opacity = opacityVal;
-
-        // 4. Update index indicators
-        const bulletsContainer = document.getElementById("bullets-container");
-        bulletsContainer.innerHTML = skillBooks.map((_, i) => `
-          <button onclick="setBookIndex(${i})" class="h-1.5 rounded-full transition-all ${i === activeBookIndex ? 'w-8 bg-teal-400' : 'w-2 bg-white/20 hover:bg-white/40'}" title="Jump to page ${i + 1}"></button>
-        `).join('');
-
-        // Re-compile icons
-        lucide.createIcons();
-      }
-
-      // Live window resizing adjustment for beautiful stacking
-      window.addEventListener("resize", () => {
-        const prevCard = document.getElementById("book-card-prev");
-        const nextCard = document.getElementById("book-card-next");
-        if (prevCard && nextCard) {
-          const isMobile = window.innerWidth < 640;
-          const offsetPercent = isMobile ? 18 : 35;
-          const scaleVal = isMobile ? 0.72 : 0.78;
-          const rotateVal = isMobile ? 22 : 32;
-          const opacityVal = isMobile ? 0.15 : 0.25;
-          
-          prevCard.style.transform = `translateX(-${offsetPercent}%) scale(${scaleVal}) rotateY(${rotateVal}deg)`;
-          prevCard.style.opacity = opacityVal;
-          
-          nextCard.style.transform = `translateX(${offsetPercent}%) scale(${scaleVal}) rotateY(-${rotateVal}deg)`;
-          nextCard.style.opacity = opacityVal;
+        // Re-compile Lucide Icons
+        if (window.lucide) {
+          window.lucide.createIcons();
         }
-      });
-
-      function setBookIndex(index) {
-        // Simple rotation exit-entrance effect
-        const card = document.getElementById("book-card-target");
-        const prevCard = document.getElementById("book-card-prev");
-        const nextCard = document.getElementById("book-card-next");
-
-        card.style.transform = "rotateY(40deg) scale(0.9) translateX(-100px)";
-        card.style.opacity = "0";
-        if (prevCard) prevCard.style.opacity = "0";
-        if (nextCard) nextCard.style.opacity = "0";
-
-        setTimeout(() => {
-          activeBookIndex = index;
-          renderActiveBook();
-          card.style.transform = "rotateY(0deg) scale(1) translateX(0px)";
-          card.style.opacity = "1";
-        }, 220);
       }
 
-      function nextBook() {
-        setBookIndex((activeBookIndex + 1) % skillBooks.length);
+      function updateSkillsCarouselTransforms(fractionalIndex = activeSkillIndex) {
+        const container = document.getElementById("skills-carousel-container");
+        if (!container) return;
+
+        const cards = container.querySelectorAll(".skill-carousel-card");
+        const len = currentFilteredSkills.length;
+        if (len === 0) return;
+
+        const isMobile = window.innerWidth < 640;
+        const spacing = isMobile ? 100 : 155;
+
+        cards.forEach((card, i) => {
+          let diff = i - fractionalIndex;
+          
+          // Wrap diff in range [-len/2, len/2] for circular seamless sliding
+          if (len >= 4) {
+            if (diff < -len / 2) diff += len;
+            if (diff > len / 2) diff -= len;
+          }
+
+          const absDiff = Math.abs(diff);
+
+          // 3D parameters
+          let translateX = diff * spacing;
+          let translateZ = -absDiff * 90;
+          let rotateY = -diff * 22;
+          let scale = Math.max(0.62, 1 - absDiff * 0.14);
+          let zIndex = Math.round(100 - absDiff * 10);
+          
+          // Smoothly fade out cards that are too far
+          let opacity = 0;
+          if (isMobile) {
+            opacity = Math.max(0, 1 - absDiff * 0.55);
+          } else {
+            opacity = Math.max(0, 1 - absDiff * 0.38);
+          }
+
+          // Apply calculated values
+          card.style.transform = `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
+          card.style.zIndex = zIndex;
+          card.style.opacity = opacity;
+          
+          // Disable interaction for non-active cards
+          if (absDiff > 0.1) {
+            card.style.pointerEvents = "none";
+          } else {
+            card.style.pointerEvents = "auto";
+          }
+        });
+
+        // Update indicators
+        const bulletsContainer = document.getElementById("skills-bullets-container");
+        if (bulletsContainer) {
+          bulletsContainer.innerHTML = currentFilteredSkills.map((_, i) => {
+            const active = i === Math.round(activeSkillIndex);
+            return `
+              <button onclick="setSkillIndex(${i})" class="h-1.5 rounded-full transition-all duration-300 ${active ? 'w-8 bg-blue-500' : 'w-2 bg-white/20 hover:bg-white/40'}" title="Jump to skill ${i + 1}"></button>
+            `;
+          }).join('');
+        }
       }
 
-      function prevBook() {
-        setBookIndex(activeBookIndex === 0 ? skillBooks.length - 1 : activeBookIndex - 1);
-      }
-
-      // Drag, Touch, & Mouse Event slider logic
-      const dragContainer = document.getElementById("drag-container");
-      const bookCard = document.getElementById("book-card-target");
-
-      function startDrag(e) {
-        isDragging = true;
-        startX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-        dragContainer.style.cursor = "grabbing";
+      // Handle direct index jump
+      function setSkillIndex(index) {
+        const len = currentFilteredSkills.length;
+        if (len === 0) return;
         
-        // Prevent default text selection during drags
+        // Boundaries safety
+        activeSkillIndex = (index + len) % len;
+        
+        // Restore transitions
+        const container = document.getElementById("skills-carousel-container");
+        if (container) {
+          const cards = container.querySelectorAll(".skill-carousel-card");
+          cards.forEach(card => {
+            card.style.transition = "transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.45s, filter 0.45s";
+          });
+        }
+        
+        updateSkillsCarouselTransforms();
+      }
+
+      function nextSkill() {
+        const len = currentFilteredSkills.length;
+        if (len === 0) return;
+        setSkillIndex((activeSkillIndex + 1) % len);
+      }
+
+      function prevSkill() {
+        const len = currentFilteredSkills.length;
+        if (len === 0) return;
+        setSkillIndex(activeSkillIndex === 0 ? len - 1 : activeSkillIndex - 1);
+      }
+
+      // Filter skills by category
+      function filterSkills(category) {
+        // Update active tab styles
+        const tabs = document.querySelectorAll("#skills-filter-tabs button");
+        tabs.forEach(btn => {
+          if (
+            (category === 'all' && btn.textContent === 'ALL') ||
+            (category === 'frontend' && btn.textContent === 'FRONTEND') ||
+            (category === 'backend' && btn.textContent === 'BACKEND') ||
+            (category === 'mobile' && btn.textContent === 'MOBILE') ||
+            (category === 'specialized' && btn.textContent === '3D & WEB3')
+          ) {
+            btn.className = "skill-tab-btn px-3.5 py-1.5 rounded-full transition-all bg-blue-600 text-white shadow-md";
+          } else {
+            btn.className = "skill-tab-btn px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white";
+          }
+        });
+
+        renderSkills(category);
+      }
+
+      // Drag, Mouse & Touch events handlers for Skills 3D Carousel
+      function startSkillDrag(e) {
+        const len = currentFilteredSkills.length;
+        if (len === 0) return;
+
+        skillIsDragging = true;
+        skillStartX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        skillCurrentX = skillStartX;
+        
+        const stage = document.getElementById("skills-stage");
+        if (stage) stage.style.cursor = "grabbing";
+
+        // Remove transitions so cards track finger 1:1 with instant response
+        const container = document.getElementById("skills-carousel-container");
+        if (container) {
+          const cards = container.querySelectorAll(".skill-carousel-card");
+          cards.forEach(card => {
+            card.style.transition = "none";
+          });
+        }
+
         if (e.cancelable && !e.type.includes('touch')) {
           e.preventDefault();
         }
       }
 
-      function dragging(e) {
-        if (!isDragging) return;
-        currentX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
-        const diffX = currentX - startX;
+      function skillDragging(e) {
+        if (!skillIsDragging) return;
         
-        // Tilt active book slightly in 3D during active dragging
-        const rotationY = Math.max(-25, Math.min(25, -diffX / 8));
-        const translationX = Math.max(-120, Math.min(120, diffX));
-        bookCard.style.transform = `rotateY(${rotationY}deg) translateX(${translationX}px)`;
-
-        // Dynamic multi-card visual physics response on drag
-        const prevCard = document.getElementById("book-card-prev");
-        const nextCard = document.getElementById("book-card-next");
-        if (prevCard && nextCard) {
-          const isMobile = window.innerWidth < 640;
-          const baseOffset = isMobile ? 18 : 35;
-          const baseScale = isMobile ? 0.72 : 0.78;
-          const baseRotate = isMobile ? 22 : 32;
-          const baseOpacity = isMobile ? 0.15 : 0.25;
-
-          // Drag factor between -1 and 1
-          const dragFactor = Math.min(1, Math.max(-1, diffX / 300));
-
-          // Drag left vs right dynamics
-          const prevOffset = baseOffset - (dragFactor * 12);
-          const prevScale = baseScale + (dragFactor * 0.08);
-          const prevRotate = baseRotate - (dragFactor * 15);
-          const prevOpacity = baseOpacity + (dragFactor * 0.2);
-
-          const nextOffset = baseOffset - (dragFactor * 12);
-          const nextScale = baseScale - (dragFactor * 0.08);
-          const nextRotate = baseRotate + (dragFactor * 15);
-          const nextOpacity = baseOpacity - (dragFactor * 0.2);
-
-          prevCard.style.transform = `translateX(-${prevOffset}%) scale(${prevScale}) rotateY(${prevRotate}deg)`;
-          prevCard.style.opacity = Math.max(0.04, Math.min(0.55, prevOpacity));
-
-          nextCard.style.transform = `translateX(${nextOffset}%) scale(${nextScale}) rotateY(-${nextRotate}deg)`;
-          nextCard.style.opacity = Math.max(0.04, Math.min(0.55, nextOpacity));
-        }
+        skillCurrentX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        const diffX = skillCurrentX - skillStartX;
+        
+        const isMobile = window.innerWidth < 640;
+        const spacing = isMobile ? 100 : 155;
+        
+        // Convert pixel displacement to index offset
+        const offset = diffX / spacing;
+        
+        updateSkillsCarouselTransforms(activeSkillIndex - offset);
       }
 
-      function endDrag() {
-        if (!isDragging) return;
-        isDragging = false;
-        dragContainer.style.cursor = "grab";
+      function endSkillDrag() {
+        if (!skillIsDragging) return;
+        skillIsDragging = false;
         
-        const diffX = currentX - startX;
-        // Check swipe threshold
-        if (Math.abs(diffX) > swipeThreshold) {
+        const stage = document.getElementById("skills-stage");
+        if (stage) stage.style.cursor = "grab";
+
+        // Restore transitions
+        const container = document.getElementById("skills-carousel-container");
+        if (container) {
+          const cards = container.querySelectorAll(".skill-carousel-card");
+          cards.forEach(card => {
+            card.style.transition = "transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.45s, filter 0.45s";
+          });
+        }
+
+        const diffX = skillCurrentX - skillStartX;
+        const len = currentFilteredSkills.length;
+
+        if (Math.abs(diffX) > skillSwipeThreshold && len > 0) {
           if (diffX > 0) {
-            prevBook();
+            // Swiped right -> go to previous
+            activeSkillIndex = activeSkillIndex === 0 ? len - 1 : activeSkillIndex - 1;
           } else {
-            nextBook();
-          }
-        } else {
-          // Reset to straight layout with smooth spring back
-          bookCard.style.transform = "rotateY(0deg) translateX(0px)";
-          
-          // Reset background cards
-          const prevCard = document.getElementById("book-card-prev");
-          const nextCard = document.getElementById("book-card-next");
-          if (prevCard && nextCard) {
-            const isMobile = window.innerWidth < 640;
-            const offsetPercent = isMobile ? 18 : 35;
-            const scaleVal = isMobile ? 0.72 : 0.78;
-            const rotateVal = isMobile ? 22 : 32;
-            const opacityVal = isMobile ? 0.15 : 0.25;
-
-            prevCard.style.transform = `translateX(-${offsetPercent}%) scale(${scaleVal}) rotateY(${rotateVal}deg)`;
-            prevCard.style.opacity = opacityVal;
-
-            nextCard.style.transform = `translateX(${offsetPercent}%) scale(${scaleVal}) rotateY(-${rotateVal}deg)`;
-            nextCard.style.opacity = opacityVal;
+            // Swiped left -> go to next
+            activeSkillIndex = (activeSkillIndex + 1) % len;
           }
         }
-        startX = 0;
-        currentX = 0;
+        
+        setSkillIndex(activeSkillIndex);
       }
-
-      dragContainer.addEventListener("dragstart", (e) => {
-        e.preventDefault();
-      });
-
-      dragContainer.addEventListener("mousedown", startDrag);
-      window.addEventListener("mousemove", dragging);
-      window.addEventListener("mouseup", endDrag);
-
-      dragContainer.addEventListener("touchstart", startDrag, { passive: true });
-      window.addEventListener("touchmove", dragging, { passive: true });
-      window.addEventListener("touchend", endDrag);
 
       // Research Publications State & Filter
       let currentPubFilter = 'all';
@@ -1223,9 +1137,33 @@ ${publications.map(p => `- **[${p.type}]** "${p.title}" - ${p.authors} (${p.venu
       // Initialize
       window.addEventListener("DOMContentLoaded", () => {
         document.getElementById("year-target").textContent = new Date().getFullYear();
-        renderActiveBook();
+        renderSkills('all');
         renderPublications();
         lucide.createIcons();
+
+        // Drag & Touch listeners for Skills Stage
+        const sStage = document.getElementById("skills-stage");
+        if (sStage) {
+          sStage.addEventListener("mousedown", startSkillDrag);
+          sStage.addEventListener("touchstart", startSkillDrag, { passive: true });
+        }
+      });
+
+      // Global window-level drag event tracking
+      window.addEventListener("mousemove", skillDragging);
+      window.addEventListener("touchmove", skillDragging, { passive: true });
+      window.addEventListener("mouseup", endSkillDrag);
+      window.addEventListener("touchend", endSkillDrag);
+
+      // Adjust carousel dimensions and spacing on resize dynamically
+      window.addEventListener("resize", () => {
+        const container = document.getElementById("skills-carousel-container");
+        if (container) {
+          const isMobile = window.innerWidth < 640;
+          container.style.setProperty('--card-width', isMobile ? '150px' : '190px');
+          container.style.setProperty('--card-height', isMobile ? '170px' : '210px');
+        }
+        updateSkillsCarouselTransforms();
       });
     </script>
   </body>
