@@ -1,9 +1,55 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <!-- Background panel glow -->
   <rect width="100%" height="100%" rx="15" fill="#E15C13" opacity="0.05"/>
-  <path d="M 15,80 C 35,80 30,50 45,50 C 60,50 55,20 85,20" stroke="#E15C13" stroke-width="6" fill="none" stroke-linecap="round"/>
-  <path d="M 15,80 C 35,80 30,65 45,65 C 60,65 55,35 85,35" stroke="#E15C13" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.6"/>
-  <path d="M 15,80 C 35,80 30,35 45,35 C 60,35 55,5 85,5" stroke="#E15C13" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.3"/>
-  <circle cx="15" cy="80" r="5" fill="#D04A02"/>
-  <circle cx="45" cy="50" r="5" fill="#D04A02"/>
-  <circle cx="85" cy="20" r="5" fill="#D04A02"/>
+  
+  <defs>
+    <!-- Beautiful Warm Gradients -->
+    <linearGradient id="peakGrad" x1="50%" y1="100%" x2="50%" y2="0%">
+      <stop offset="0%" stop-color="#D04A02" />
+      <stop offset="50%" stop-color="#E15C13" />
+      <stop offset="100%" stop-color="#FFA844" />
+    </linearGradient>
+    <linearGradient id="shadeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFA844" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#D04A02" stop-opacity="0.95"/>
+    </linearGradient>
+  </defs>
+
+  <!-- L-shaped Base Shadow / Floor Grid -->
+  <path d="M 20,65 L 50,85 L 80,65 L 50,65 L 50,45 Z" fill="#000000" opacity="0.1"/>
+
+  <!-- 3D L-shaped Membrane Surface -->
+  <!-- Back-Left Lobe -->
+  <path d="M 20,65 C 30,55 40,45 50,40 C 50,48 50,56 50,85 C 40,80 30,73 20,65 Z" fill="url(#peakGrad)" stroke="#B33E01" stroke-width="0.5"/>
+  
+  <!-- Front Lobe -->
+  <path d="M 50,85 C 60,80 70,73 80,65 C 70,55 60,45 50,40 C 50,56 50,72 50,85 Z" fill="url(#shadeGrad)" stroke="#B33E01" stroke-width="0.5"/>
+
+  <!-- Back-Right Lobe -->
+  <path d="M 80,65 C 70,58 60,51 50,45 C 50,40 50,40 50,40 C 60,45 70,55 80,65 Z" fill="#E15C13" opacity="0.7" stroke="#B33E01" stroke-width="0.5"/>
+  <path d="M 50,45 C 50,32 50,20 50,20 C 35,32 25,50 20,65 C 30,58 40,48 50,40 Z" fill="url(#peakGrad)" stroke="#B33E01" stroke-width="0.5"/>
+
+  <!-- Grid Lines (MATLAB Mesh Look) -->
+  <!-- Left Lobe Grid Lines -->
+  <path d="M 20,65 C 28,60 38,50 50,40" stroke="#FFFFFF" stroke-width="0.5" fill="none" opacity="0.35"/>
+  <path d="M 30,71 C 37,64 43,53 50,40" stroke="#FFFFFF" stroke-width="0.5" fill="none" opacity="0.35"/>
+  <path d="M 40,78 C 45,71 47,58 50,40" stroke="#FFFFFF" stroke-width="0.5" fill="none" opacity="0.35"/>
+  
+  <!-- Front Lobe Grid Lines -->
+  <path d="M 80,65 C 72,60 62,50 50,40" stroke="#FFFFFF" stroke-width="0.5" fill="none" opacity="0.35"/>
+  <path d="M 70,71 C 63,64 57,53 50,40" stroke="#FFFFFF" stroke-width="0.5" fill="none" opacity="0.35"/>
+  <path d="M 60,78 C 55,71 53,58 50,40" stroke="#FFFFFF" stroke-width="0.5" fill="none" opacity="0.35"/>
+
+  <!-- Back Lobe Grid Lines -->
+  <path d="M 20,65 C 30,50 40,32 50,20" stroke="#FFFFFF" stroke-width="0.5" fill="none" opacity="0.35"/>
+  <path d="M 30,55 C 38,42 45,30 50,20" stroke="#FFFFFF" stroke-width="0.5" fill="none" opacity="0.35"/>
+  <path d="M 40,48 C 45,35 48,26 50,20" stroke="#FFFFFF" stroke-width="0.5" fill="none" opacity="0.35"/>
+
+  <!-- Vertical Ribs -->
+  <path d="M 50,85 C 50,70 50,55 50,40" stroke="#FFA844" stroke-width="1" fill="none" opacity="0.6"/>
+  <path d="M 50,40 C 50,33 50,26 50,20" stroke="#FFA844" stroke-width="1" fill="none" opacity="0.6"/>
+
+  <!-- Peak Highlight Dot -->
+  <circle cx="50" cy="40" r="2.5" fill="#FFFFFF"/>
+  <circle cx="50" cy="20" r="2" fill="#FFA844"/>
 </svg>
