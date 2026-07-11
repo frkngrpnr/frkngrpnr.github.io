@@ -147,7 +147,7 @@
         <!-- Quick Stats Panel -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-10 mt-10 border-t border-white/5 text-left">
           <div>
-            <p class="text-2xl md:text-3xl font-bold text-white">15</p>
+            <p id="pub-count-stat" class="text-2xl md:text-3xl font-bold text-white">15</p>
             <p class="text-xs text-white/40 font-mono mt-1 uppercase tracking-wider">Publications</p>
           </div>
           <div>
@@ -155,8 +155,8 @@
             <p class="text-xs text-white/40 font-mono mt-1 uppercase tracking-wider">CVPR ML Challenge</p>
           </div>
           <div>
-            <p class="text-2xl md:text-3xl font-bold text-white">2010</p>
-            <p class="text-xs text-white/40 font-mono mt-1 uppercase tracking-wider">Dev Active Since</p>
+            <p class="text-2xl md:text-3xl font-bold text-white">10+ Years</p>
+            <p class="text-xs text-white/40 font-mono mt-1 uppercase tracking-wider">Full Stack Exp.</p>
           </div>
           <div>
             <p class="text-2xl md:text-3xl font-bold text-indigo-400">M.S.</p>
@@ -289,7 +289,7 @@
             <div class="absolute left-2.5 top-1.5 w-3 h-3 rounded-full bg-white/20 group-hover/timeline:scale-125 transition-transform"></div>
             <div class="space-y-2">
               <div class="flex flex-col sm:flex-row justify-between items-start sm:items-baseline gap-1">
-                <span class="text-xs font-mono text-white/40 font-bold uppercase tracking-wider">Mechanical Engineering // 2010</span>
+                <span class="text-xs font-mono text-white/40 font-bold uppercase tracking-wider">Boğaziçi University // 2010</span>
                 <span class="px-2.5 py-0.5 bg-white/5 text-white/50 border border-white/5 text-[9px] font-mono rounded-full">ACADEMIC EXP</span>
               </div>
               <h4 class="text-lg font-bold text-white">Teaching Assistant</h4>
@@ -314,7 +314,8 @@
               <h3 class="text-2xl font-extrabold text-white tracking-tight">Peer-Reviewed Publications</h3>
             </div>
             <p class="text-sm text-white/50">
-              Peer-reviewed papers in major venues including IEEE Transactions, CVPRW and ICPR.
+              <!--Peer-reviewed papers in major venues including IEEE Transactions, CVPRW and ICPR.-->
+              I have co-authored these papers in major venues including IEEE Transactions, CVPRW and ICPR:
             </p>
           </div>
 
@@ -649,121 +650,121 @@
     <!-- Frontend Interactive Script -->
     <script>
       // Furkan's Full CV Publications Dataset
-      const publications = [
-        {
-          type: "Journal Paper",
-          authors: "H.J. Escalante, H. Kaya, A.A. Salah, S. Escalera, Y. Güçlütürk, U. Güçlü, X. Baró, I. Guyon, J.C.S.J. Junior, M. Madadi, S. Ayache, E. Viegas, F. Gürpınar, A. S. Wicaksana, C.C.S. Liem, M.A.J. Van Gerven, R.J. Van Lier",
-          title: "Modeling, recognizing, and explaining apparent personality from videos",
-          venue: "IEEE Transactions on Affective Computing",
-          year: 2020
-        },
-        {
-          type: "Journal Paper",
-          authors: "Kaya, H., F. Gürpınar, A.A. Salah",
-          title: "Video Based Emotion Recognition in the Wild using Deep Transfer Learning and Score Fusion",
-          venue: "Image and Vision Computing",
-          year: 2017
-        },
-        {
-          type: "Conference Paper",
-          authors: "Kaya, H., F. Gürpınar, A.A. Salah",
-          title: "Video-based Emotion Recognition in the Wild using Deep Transfer Learning and Score Fusion",
-          venue: "ACM International Conference on Multimodal Interaction (ICMI)",
-          year: 2016
-        },
-        {
-          type: "Conference Paper",
-          authors: "Kaya, H., F. Gürpınar, A.A. Salah",
-          title: "Multi-modal Score Fusion and Decision Trees for Explainable Automatic Job Candidate Screening from Video CVs",
-          venue: "IEEE Conf. on Computer Vision and Pattern Recognition Workshops (CVPRW)",
-          year: 2017
-        },
-        {
-          type: "Conference Paper",
-          authors: "Gürpınar, F., H. Kaya, A.A. Salah",
-          title: "Apparent Personality Classification from Video CVs using Fusion of Multimodal Features",
-          venue: "International Conference on Computer Vision Theory and Applications (VISAPP)",
-          year: 2017
-        },
-        {
-          type: "Conference Paper",
-          authors: "Gürpınar, F., H. Kaya, A.A. Salah",
-          title: "Multimodal Fusion of Audio, Scene, and Face Features for First Impression Estimation",
-          venue: "International Conference on Pattern Recognition (ICPR)",
-          year: 2016
-        },
-        {
-          type: "Conference Paper",
-          authors: "Gürpınar, F., H. Kaya, A.A. Salah",
-          title: "Combining Deep Facial and Ambient Features for First Impression Estimation",
-          venue: "European Conference on Computer Vision Workshops (ECCVW)",
-          year: 2016
-        },
-        {
-          type: "Conference Paper",
-          authors: "Gürpınar, F., H. Kaya, H. Dibeklioğlu, A.A. Salah",
-          title: "Kernel ELM and CNN based Facial Age Estimation",
-          venue: "IEEE Conference on Computer Vision and Pattern Recognition Workshops (CVPRW)",
-          year: 2016
-        },
-        {
-          type: "Conference Paper",
-          authors: "Kaya, H., F. Gürpınar, S. Afshar, A.A. Salah",
-          title: "Contrasting and Combining Least Squares Based Learners for Emotion Recognition in the Wild",
-          venue: "ACM International Conference on Multimodal Interaction (ICMI)",
-          year: 2015
-        },
-        {
-          type: "Conference Paper",
-          authors: "Gürpınar, F., H. Kaya, S. Afshar, H. Dibeklioğlu, A.A. Salah",
-          title: "Kernel ELM based Age Estimation",
-          venue: "Int. Conf. on Computer Graphics, Animation and Gaming Technologies (Eurasia Graphics), Istanbul",
-          year: 2015
-        },
-        {
-          type: "Book Chapter",
-          authors: "Dibeklioğlu, H., A.A. Salah, F. Gürpınar",
-          title: "Measurement of Facial Dynamics for Soft Biometrics",
-          venue: "Int. Workshop on Face and Facial Expression Recognition from Real World Videos, Springer Verlag",
-          year: 2015
-        },
-        {
-          type: "Conference Paper",
-          authors: "H.J. Escalante, V. Ponce-López, J. Wan, M.A. Riegler, B. Chen, A. Clapés, S. Escalera, I. Guyon, X. Baró, P. Halvorsen, H.J. Müller, H. Kaya, F. Gürpınar, A.A. Salah",
-          title: "ChaLearn Joint Contest on Multimodal Gesture and Action Recognition and Apparent Personality Analysis: Dataset and Results",
-          venue: "International Conference on Pattern Recognition Workshops (ICPRW)",
-          year: 2016
-        },
-        {
-          type: "Conference Paper",
-          authors: "H.J. Escalante, H. Kaya, A.A. Salah, S. Escalera, Y. Güçlütürk, U. Güçlü, X. Baró, I. Guyon, J.C.S.J. Junior, M. Madadi, S. Ayache, E. Viegas, F. Gürpınar, A.S. Wicaksana, C.C.S. Liem, M.A.J. Van Gerven, R.J. Van Lier",
-          title: "First Impressions Challenge: Dataset and Results",
-          venue: "European Conference on Computer Vision Workshops (ECCVW)",
-          year: 2016
-        },
-        {
-          type: "Conference Paper",
-          authors: "H.J. Escalante, H. Kaya, A.A. Salah, S. Escalera, Y. Güçlütürk, U. Güçlü, X. Baró, I. Guyon, J.C.S.J. Junior, M. Madadi, S. Ayache, E. Viegas, F. Gürpınar, A.S. Wicaksana, C.C.S. Liem, M.A.J. Van Gerven, R.J. Van Lier",
-          title: "ChaLearn Looking at People: Explainable Apparent Personality Analysis Challenge",
-          venue: "IEEE Conference on Computer Vision and Pattern Recognition Workshops (CVPRW)",
-          year: 2017
-        },
-        {
-          type: "Conference Paper",
-          authors: "H.J. Escalante, H. Kaya, A.A. Salah, S. Escalera, Y. Güçlütürk, U. Güçlü, X. Baró, I. Guyon, J.C.S.J. Junior, M. Madadi, S. Ayache, E. Viegas, F. Gürpınar, A.S. Wicaksana, C.C.S. Liem, M.A.J. Van Gerven, R.J. Van Lier",
-          title: "Explainable Practical Job Candidate Screening from Video CVs Challenge",
-          venue: "Proceedings of Machine Learning Research (PMLR)",
-          year: 2017
-        }
-      ];
+  const publications = [
+  {
+    type: "Conference Paper",
+    authors: "H. Dibeklioğlu, A.A. Salah, F. Gürpınar",
+    title: "Measurement of facial dynamics for soft biometrics",
+    venue: "International Workshop on Face and Facial Expression Recognition from Real World Videos",
+    year: 2014
+  },
+  {
+    type: "Book Chapter",
+    authors: "F. Gürpınar, C. Bisson, Ö.Y. Diner",
+    title: "Bayesian and Graph Theory Approaches to Develop Strategic Early Warning Systems for the Milk Market",
+    venue: "New Contributions in Information Systems and Technologies: Volume 1",
+    year: 2015
+  },
+  {
+    type: "Conference Paper",
+    authors: "H. Kaya, F. Gürpinar, S. Afshar, A.A. Salah",
+    title: "Contrasting and combining least squares based learners for emotion recognition in the wild",
+    venue: "Proceedings of the 2015 ACM on international conference on multimodal interaction",
+    year: 2015
+  },
+  {
+    type: "Journal Paper",
+    authors: "F. Gürpınar, H. Kaya, S. Afshar, H. Dibeklioğlu, A. Salah",
+    title: "Kernel ELM based age estimation",
+    venue: "Journal of Naval Sciences and Engineering",
+    year: 2016
+  },
+  {
+    type: "Conference Paper",
+    authors: "F. Gurpinar, H. Kaya, H. Dibeklioglu, A. Salah",
+    title: "Kernel ELM and CNN based facial age estimation",
+    venue: "Proceedings of the IEEE conference on computer vision and pattern recognition workshops",
+    year: 2016
+  },
+  {
+    type: "Conference Paper",
+    authors: "F. Gürpınar, H. Kaya, A.A. Salah",
+    title: "Combining deep facial and ambient features for first impression estimation",
+    venue: "European conference on computer vision",
+    year: 2016
+  },
+  {
+    type: "Journal Paper",
+    authors: "H. Kaya, F. Gürpınar, A.A. Salah",
+    title: "Video-based emotion recognition in the wild using deep transfer learning and score fusion",
+    venue: "Image and Vision Computing",
+    year: 2017
+  },
+  {
+    type: "Unpublished",
+    authors: "F. Gürpınar, H. Kaya, A.A. Salah",
+    title: "Multimodal Fusion of Audio, Scene, and Face Features for First Impression Estimation",
+    venue: "",
+    year: null
+  },
+  {
+    type: "Conference Paper",
+    authors: "H. Kaya, F. Gurpinar, A. Ali Salah",
+    title: "Multi-modal score fusion and decision trees for explainable automatic job candidate screening from video cvs",
+    venue: "Proceedings of the IEEE conference on computer vision and pattern recognition workshops",
+    year: 2017
+  },
+  {
+    type: "Journal Paper",
+    authors: "H.J. Escalante, H. Kaya, A.A. Salah, S. Escalera, Y. Güçlütürk, U. Güçlü, X. Baró, I. Guyon, J.C.S.J. Junior, M. Madadi, S. Ayache, E. Viegas, F. Gürpınar, A. S. Wicaksana, C.C.S. Liem, M.A.J. Van Gerven, R.J. Van Lier",
+    title: "Modeling, recognizing, and explaining apparent personality from videos",
+    venue: "IEEE Transactions on Affective Computing",
+    year: 2020
+  },
+  {
+    type: "Book Chapter",
+    authors: "A.A. Salah, H. Kaya, F. Gürpınar",
+    title: "Video-based emotion recognition",
+    venue: "Multimodal Behavior Analysis in the Wild: Advances and Challenges",
+    year: 2018
+  },
+  {
+    type: "Book Chapter",
+    authors: "A.A. Salah, H. Kaya, F. Gürpınar",
+    title: "Video-based emotion recognition in the wild",
+    venue: "Multimodal behavior analysis in the wild",
+    year: 2019
+  },
+  {
+    type: "Journal Paper",
+    authors: "C. Bisson, F. Gurpinar",
+    title: "A Bayesian approach to developing a strategic early warning system for the French milk market",
+    venue: "Journal of Intelligence Studies in Business",
+    year: 2017
+  },
+  {
+    type: "Journal Paper",
+    authors: "M. Madadi, S. Ayache, E. Viegas, F. Gürpınar, A.S. Wicaksana",
+    title: "Modeling, Recognizing, and Explaining Apparent Personality From Videos",
+    venue: "IEEE Transactions on Affective Computing",
+    year: 2022
+  },
+  {
+    type: "Conference Paper",
+    authors: "F. Gurpinar, H. Kaya, S. Afshar, H. Dibeklioglu, A.A. Salah",
+    title: "Kernel ELM based Age Estimation",
+    venue: "Proceedings of the International Conference on Computer Graphics, Animation and Gaming Technologies (Eurasia Graphics)",
+    year: 2015
+  },
+];
 
       // Skills Data Catalog
       const skillsData = [
         { name: "JavaScript", logo: "javascript.png", category: "frontend", icon: "code", color: "from-amber-500/10 to-yellow-500/5", border: "border-amber-500/20", text: "text-amber-400" },
-        { name: "TypeScript", logo: "typescript.png", category: "frontend", icon: "braces", color: "from-blue-500/10 to-indigo-500/5", border: "border-blue-500/20", text: "text-blue-400" },
+        { name: "TypeScript", logo: "typescript.svg", category: "frontend", icon: "braces", color: "from-blue-500/10 to-indigo-500/5", border: "border-blue-500/20", text: "text-blue-400" },
         { name: "Vue", logo: "vue.svg", category: "frontend", icon: "layers", color: "from-emerald-500/10 to-teal-500/5", border: "border-emerald-500/20", text: "text-emerald-400" },
-        { name: "React", logo: "react.png", category: "frontend", icon: "atom", color: "from-sky-500/10 to-cyan-500/5", border: "border-sky-500/20", text: "text-sky-400" },
-        { name: "Angular", logo: "angular.png", category: "frontend", icon: "atom", color: "from-red-500/10 to-rose-500/5", border: "border-red-500/20", text: "text-red-400" },
+        { name: "React", logo: "react.svg", category: "frontend", icon: "atom", color: "from-sky-500/10 to-cyan-500/5", border: "border-sky-500/20", text: "text-sky-400" },
+        { name: "Angular", logo: "angular.svg", category: "frontend", icon: "atom", color: "from-red-500/10 to-rose-500/5", border: "border-red-500/20", text: "text-red-400" },
         { name: "Electron", logo: "electron.svg", category: "frontend", icon: "atom", color: "from-slate-500/10 to-zinc-500/5", border: "border-slate-500/20", text: "text-slate-300" },
         { name: "Tauri", logo: "tauri.svg", category: "frontend", icon: "binary", color: "from-purple-500/10 to-violet-500/5", border: "border-purple-500/20", text: "text-purple-400" },
         { name: "Node.js", logo: "nodejs.svg", category: "backend", icon: "server", color: "from-green-500/10 to-lime-500/5", border: "border-green-500/20", text: "text-green-400" },
@@ -778,8 +779,8 @@
         { name: "Phaser.js", logo: "phaser.svg", category: "game_dev", icon: "box", color: "from-amber-500/10 to-orange-500/5", border: "border-amber-500/20", text: "text-amber-400" },
         { name: "Pixi.js", logo: "pixi.svg", category: "game_dev", icon: "box", color: "from-cyan-500/10 to-teal-500/5", border: "border-cyan-500/20", text: "text-cyan-400" },
         { name: "LÖVE", logo: "love.png", category: "game_dev", icon: "box", color: "from-pink-500/10 to-rose-400/5", border: "border-pink-500/20", text: "text-pink-400" },
-        { name: "MATLAB", logo: "matlab.png", category: "other", icon: "binary", color: "from-rose-600/10 to-orange-500/5", border: "border-rose-500/20", text: "text-rose-400" },
-        { name: "R", logo: "r.png", category: "other", icon: "binary", color: "from-sky-500/10 to-blue-500/5", border: "border-sky-500/20", text: "text-sky-400" },
+        { name: "MATLAB", logo: "matlab.svg", category: "other", icon: "binary", color: "from-rose-600/10 to-orange-500/5", border: "border-rose-500/20", text: "text-rose-400" },
+        { name: "R", logo: "r.svg", category: "other", icon: "binary", color: "from-sky-500/10 to-blue-500/5", border: "border-sky-500/20", text: "text-sky-400" },
         { name: "C / C++", logo: "cpp.svg", category: "other", icon: "cpu", color: "from-indigo-600/10 to-blue-600/5", border: "border-indigo-500/20", text: "text-indigo-400" },
         { name: "C#", logo: "csharp.svg", category: "other", icon: "cpu", color: "from-violet-600/10 to-purple-600/5", border: "border-violet-500/20", text: "text-violet-400" },
         { name: "Solidity", logo: "solidity.svg", category: "other", icon: "shield", color: "from-fuchsia-600/10 to-pink-600/5", border: "border-fuchsia-500/20", text: "text-fuchsia-400" },
@@ -1232,6 +1233,13 @@ ${publications.map(p => `- **[${p.type}]** "${p.title}" - ${p.authors} (${p.venu
       // Initialize
       window.addEventListener("DOMContentLoaded", () => {
         document.getElementById("year-target").textContent = new Date().getFullYear();
+        
+        // Dynamically update publications count stat based on dataset length
+        const pubCountStat = document.getElementById("pub-count-stat");
+        if (pubCountStat) {
+          pubCountStat.textContent = publications.length;
+        }
+
         renderSkills('all');
         renderPublications();
         lucide.createIcons();
