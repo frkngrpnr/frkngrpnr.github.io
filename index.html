@@ -117,7 +117,7 @@
 
         <button onclick="openCVModal()" class="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full text-xs font-bold text-white transition-all shadow-lg shadow-blue-900/35 hover:brightness-110 active:scale-95" id="view-cv-btn">
           <i data-lucide="file-text" class="w-4 h-4 text-white/90"></i>
-          <span>Interactive LaTeX CV</span>
+          <span>Interactive CV</span>
           <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-white/60"></i>
         </button>
       </div>
@@ -147,7 +147,7 @@
         <!-- Quick Stats Panel -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-10 mt-10 border-t border-white/5 text-left">
           <div>
-            <p class="text-2xl md:text-3xl font-bold text-white">9+</p>
+            <p class="text-2xl md:text-3xl font-bold text-white">15</p>
             <p class="text-xs text-white/40 font-mono mt-1 uppercase tracking-wider">Publications</p>
           </div>
           <div>
@@ -346,7 +346,7 @@
 
         <!-- Publication stats and Google Scholar link -->
         <div class="flex flex-col sm:flex-row justify-between items-center text-[10px] font-mono text-white/30 pt-4 border-t border-white/5 gap-3">
-          <span id="pub-count-display">SHOWING 9 OF 9 SCHOLARLY WORKS</span>
+          <span id="pub-count-display">SHOWING 15 OF 15 SCHOLARLY WORKS</span>
           <a 
             href="https://scholar.google.com/scholar?q=Furkan+G%C3%BCrp%C4%B1nar" 
             target="_blank" 
@@ -531,12 +531,7 @@
     <!-- Dynamic Wide Footer -->
     <footer class="w-full max-w-5xl mx-auto mt-16 flex flex-col md:flex-row justify-between items-center gap-6 pt-8 border-t border-white/5 text-[10px] font-mono text-white/30 uppercase tracking-[0.2em] z-10">
       <div>&copy; <span id="year-target">2026</span> Furkan Gürpınar Portfolio</div>
-      <div class="flex items-center gap-2">
-        <span>Designed with Intent</span>
-        <div class="w-1.5 h-1.5 rounded-full bg-teal-400"></div>
-        <span>Pure Static HTML/CSS/JS Active</span>
-      </div>
-      <div>No cell phone numbers included in UI</div>
+      <div>All Rights Reserved</div>
     </footer>
 
     <!-- Interactive LaTeX-like CV Modal (Same pristine content) -->
@@ -671,9 +666,23 @@
         },
         {
           type: "Conference Paper",
-          authors: "Kaya H., F. Gürpınar, A.A. Salah",
+          authors: "Kaya, H., F. Gürpınar, A.A. Salah",
+          title: "Video-based Emotion Recognition in the Wild using Deep Transfer Learning and Score Fusion",
+          venue: "ACM International Conference on Multimodal Interaction (ICMI)",
+          year: 2016
+        },
+        {
+          type: "Conference Paper",
+          authors: "Kaya, H., F. Gürpınar, A.A. Salah",
           title: "Multi-modal Score Fusion and Decision Trees for Explainable Automatic Job Candidate Screening from Video CVs",
           venue: "IEEE Conf. on Computer Vision and Pattern Recognition Workshops (CVPRW)",
+          year: 2017
+        },
+        {
+          type: "Conference Paper",
+          authors: "Gürpınar, F., H. Kaya, A.A. Salah",
+          title: "Apparent Personality Classification from Video CVs using Fusion of Multimodal Features",
+          venue: "International Conference on Computer Vision Theory and Applications (VISAPP)",
           year: 2017
         },
         {
@@ -694,7 +703,7 @@
           type: "Conference Paper",
           authors: "Gürpınar, F., H. Kaya, H. Dibeklioğlu, A.A. Salah",
           title: "Kernel ELM and CNN based Facial Age Estimation",
-          venue: "IEEE Conference on Computer Vision and Pattern Recognition Workshops",
+          venue: "IEEE Conference on Computer Vision and Pattern Recognition Workshops (CVPRW)",
           year: 2016
         },
         {
@@ -717,6 +726,34 @@
           title: "Measurement of Facial Dynamics for Soft Biometrics",
           venue: "Int. Workshop on Face and Facial Expression Recognition from Real World Videos, Springer Verlag",
           year: 2015
+        },
+        {
+          type: "Conference Paper",
+          authors: "H.J. Escalante, V. Ponce-López, J. Wan, M.A. Riegler, B. Chen, A. Clapés, S. Escalera, I. Guyon, X. Baró, P. Halvorsen, H.J. Müller, H. Kaya, F. Gürpınar, A.A. Salah",
+          title: "ChaLearn Joint Contest on Multimodal Gesture and Action Recognition and Apparent Personality Analysis: Dataset and Results",
+          venue: "International Conference on Pattern Recognition Workshops (ICPRW)",
+          year: 2016
+        },
+        {
+          type: "Conference Paper",
+          authors: "H.J. Escalante, H. Kaya, A.A. Salah, S. Escalera, Y. Güçlütürk, U. Güçlü, X. Baró, I. Guyon, J.C.S.J. Junior, M. Madadi, S. Ayache, E. Viegas, F. Gürpınar, A.S. Wicaksana, C.C.S. Liem, M.A.J. Van Gerven, R.J. Van Lier",
+          title: "First Impressions Challenge: Dataset and Results",
+          venue: "European Conference on Computer Vision Workshops (ECCVW)",
+          year: 2016
+        },
+        {
+          type: "Conference Paper",
+          authors: "H.J. Escalante, H. Kaya, A.A. Salah, S. Escalera, Y. Güçlütürk, U. Güçlü, X. Baró, I. Guyon, J.C.S.J. Junior, M. Madadi, S. Ayache, E. Viegas, F. Gürpınar, A.S. Wicaksana, C.C.S. Liem, M.A.J. Van Gerven, R.J. Van Lier",
+          title: "ChaLearn Looking at People: Explainable Apparent Personality Analysis Challenge",
+          venue: "IEEE Conference on Computer Vision and Pattern Recognition Workshops (CVPRW)",
+          year: 2017
+        },
+        {
+          type: "Conference Paper",
+          authors: "H.J. Escalante, H. Kaya, A.A. Salah, S. Escalera, Y. Güçlütürk, U. Güçlü, X. Baró, I. Guyon, J.C.S.J. Junior, M. Madadi, S. Ayache, E. Viegas, F. Gürpınar, A.S. Wicaksana, C.C.S. Liem, M.A.J. Van Gerven, R.J. Van Lier",
+          title: "Explainable Practical Job Candidate Screening from Video CVs Challenge",
+          venue: "Proceedings of Machine Learning Research (PMLR)",
+          year: 2017
         }
       ];
 
