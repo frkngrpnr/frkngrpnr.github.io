@@ -43,28 +43,6 @@
         background: rgba(255, 255, 255, 0.25);
       }
       
-      /* Book rotation & perspective */
-      .book-container {
-        perspective: 1200px;
-        transform-style: preserve-3d;
-        user-select: none;
-        -webkit-user-select: none;
-      }
-      .book-card {
-        transform-style: preserve-3d;
-        backface-visibility: hidden;
-        -webkit-backface-visibility: hidden;
-        transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-        user-select: none;
-        -webkit-user-select: none;
-        -webkit-user-drag: none;
-      }
-      .book-card * {
-        user-select: none;
-        -webkit-user-select: none;
-        -webkit-user-drag: none;
-      }
-      
       /* Webprint specific styles to guarantee pristine CV layout */
       @media print {
         body * {
@@ -359,6 +337,7 @@
           </a>
         </div>
       </section>
+
 
       <!-- 5. AWARDS & LAB REFERENCES GRID PANEL (Single Column Multi-Block layout) -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -801,7 +780,7 @@
 
       // Skills Data Catalog
       const skillsData = [
-        { name: "JavaScript", logo: "javascript.svg", category: "frontend", icon: "code", color: "from-amber-500/10 to-yellow-500/5", border: "border-amber-500/20", text: "text-amber-400" },
+        { name: "JavaScript", logo: "javascript.png", category: "frontend", icon: "code", color: "from-amber-500/10 to-yellow-500/5", border: "border-amber-500/20", text: "text-amber-400" },
         { name: "TypeScript", logo: "typescript.svg", category: "frontend", icon: "braces", color: "from-blue-500/10 to-indigo-500/5", border: "border-blue-500/20", text: "text-blue-400" },
         { name: "Vue", logo: "vue.svg", category: "frontend", icon: "layers", color: "from-emerald-500/10 to-teal-500/5", border: "border-emerald-500/20", text: "text-emerald-400" },
         { name: "React", logo: "react.svg", category: "frontend", icon: "atom", color: "from-sky-500/10 to-cyan-500/5", border: "border-sky-500/20", text: "text-sky-400" },
@@ -859,7 +838,7 @@
               <!-- Logo Image Container with dynamic SVG fallback -->
               <div class="w-14 h-14 rounded-2xl bg-white/[0.02] border border-white/5 flex items-center justify-center p-2.5 relative group-hover:scale-110 transition-transform duration-300 shrink-0 z-10">
                 <img 
-                  src="public/logos/${skill.logo}" 
+                  src="public/logos/${skill.logo}?v=3" 
                   alt="${skill.name}" 
                   class="w-full h-full object-contain filter drop-shadow-md" 
                   onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
@@ -1230,6 +1209,11 @@
         renderPublications();
       }
 
+      function handlePubSearch() {
+        pubSearchQuery = document.getElementById("pub-search").value;
+        renderPublications();
+      }
+
       // Interactive Academic CV Modal controller
       function openCVModal() {
         document.getElementById("cv-modal").classList.remove("hidden");
@@ -1306,6 +1290,7 @@ ${publications.map(p => `- **[${p.type}]** "${p.title}" - ${p.authors} (${p.venu
 
         renderSkills('all');
         renderPublications();
+        
         lucide.createIcons();
 
         // Drag & Touch listeners for Skills Stage
