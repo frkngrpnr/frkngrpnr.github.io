@@ -43,6 +43,20 @@
         background: rgba(255, 255, 255, 0.25);
       }
       
+      /* Hide scrollbar utility class */
+      .scrollbar-none::-webkit-scrollbar {
+        display: none;
+      }
+      .scrollbar-none {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+
+      /* Enable mobile responsive horizontal swiping by preventing default horizontal panning */
+      #skills-stage, .skill-carousel-card {
+        touch-action: pan-y;
+      }
+      
       /* Webprint specific styles to guarantee pristine CV layout */
       @media print {
         body * {
@@ -160,12 +174,12 @@
           </div>
           
           <!-- Category Quick Filter Tabs -->
-          <div class="flex flex-wrap gap-1 bg-white/5 p-1 rounded-full text-xs font-semibold" id="skills-filter-tabs">
-            <button onclick="filterSkills('all')" class="skill-tab-btn px-3.5 py-1.5 rounded-full transition-all bg-blue-600 text-white shadow-md">ALL</button>
-            <button onclick="filterSkills('frontend')" class="skill-tab-btn px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white">FRONTEND</button>
-            <button onclick="filterSkills('backend')" class="skill-tab-btn px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white">BACKEND</button>
-            <button onclick="filterSkills('mobile')" class="skill-tab-btn px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white">MOBILE</button>
-            <button onclick="filterSkills('game_dev')" class="skill-tab-btn px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white">GAME DEVELOPMENT</button>
+          <div class="flex flex-row flex-nowrap overflow-x-auto scrollbar-none gap-1 bg-white/5 p-1 rounded-full text-xs font-semibold max-w-full w-full md:w-auto whitespace-nowrap shrink-0" id="skills-filter-tabs">
+            <button onclick="filterSkills('all')" class="skill-tab-btn px-4 py-2 md:px-3.5 md:py-1.5 rounded-full transition-all bg-blue-600 text-white shadow-md shrink-0">ALL</button>
+            <button onclick="filterSkills('frontend')" class="skill-tab-btn px-4 py-2 md:px-3.5 md:py-1.5 rounded-full transition-all text-white/40 hover:text-white shrink-0">FRONTEND</button>
+            <button onclick="filterSkills('backend')" class="skill-tab-btn px-4 py-2 md:px-3.5 md:py-1.5 rounded-full transition-all text-white/40 hover:text-white shrink-0">BACKEND</button>
+            <button onclick="filterSkills('mobile')" class="skill-tab-btn px-4 py-2 md:px-3.5 md:py-1.5 rounded-full transition-all text-white/40 hover:text-white shrink-0">MOBILE</button>
+            <button onclick="filterSkills('game_dev')" class="skill-tab-btn px-4 py-2 md:px-3.5 md:py-1.5 rounded-full transition-all text-white/40 hover:text-white shrink-0">GAME DEVELOPMENT</button>
           </div>
         </div>
 
@@ -981,9 +995,9 @@
             (category === 'mobile' && btn.textContent === 'MOBILE') ||
             (category === 'game_dev' && btn.textContent === 'GAME DEVELOPMENT')
           ) {
-            btn.className = "skill-tab-btn px-3.5 py-1.5 rounded-full transition-all bg-blue-600 text-white shadow-md";
+            btn.className = "skill-tab-btn px-4 py-2 md:px-3.5 md:py-1.5 rounded-full transition-all bg-blue-600 text-white shadow-md shrink-0";
           } else {
-            btn.className = "skill-tab-btn px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white";
+            btn.className = "skill-tab-btn px-4 py-2 md:px-3.5 md:py-1.5 rounded-full transition-all text-white/40 hover:text-white shrink-0";
           }
         });
 
@@ -1053,9 +1067,11 @@
         if (Math.abs(diffX) > skillSwipeThreshold && len > 0) {
           const isMobile = window.innerWidth < 640;
           const spacing = isMobile ? 100 : 155;
-          const offset = diffX / spacing;
-          let targetIndex = Math.round(activeSkillIndex - offset);
-          activeSkillIndex = ((targetIndex % len) + len) % len;
+          let offsetVal = Math.round(diffX / spacing);
+          if (offsetVal === 0) {
+            offsetVal = Math.sign(diffX);
+          }
+          activeSkillIndex = ((activeSkillIndex - offsetVal) % len + len) % len;
         }
         
         setSkillIndex(activeSkillIndex);
@@ -1306,6 +1322,7 @@ ${publications.map(p => `- **[${p.type}]** "${p.title}" - ${p.authors} (${p.venu
       window.addEventListener("touchmove", skillDragging, { passive: true });
       window.addEventListener("mouseup", endSkillDrag);
       window.addEventListener("touchend", endSkillDrag);
+      window.addEventListener("touchcancel", endSkillDrag);
 
       // Adjust carousel dimensions and spacing on resize dynamically
       window.addEventListener("resize", () => {
