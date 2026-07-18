@@ -102,16 +102,10 @@
 
       <!-- Header actions -->
       <div class="flex items-center gap-3.5 w-full sm:w-auto justify-end">
-        <a href="mailto:gurpinarfurkan@gmail.com" class="hidden sm:flex items-center gap-2 px-4 py-2 border border-white/5 rounded-full text-xs font-semibold bg-white/5 hover:bg-white/10 text-white/80 hover:text-white transition-all font-mono">
+        <a href="mailto:gurpinarfurkan@gmail.com" class="flex items-center gap-2 px-4 py-2 border border-white/5 rounded-full text-xs font-semibold bg-white/5 hover:bg-white/10 text-white/80 hover:text-white transition-all font-mono">
           <i data-lucide="mail" class="w-3.5 h-3.5 text-teal-400"></i>
           <span>gurpinarfurkan@gmail.com</span>
         </a>
-
-        <button onclick="openCVModal()" class="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full text-xs font-bold text-white transition-all shadow-lg shadow-blue-900/35 hover:brightness-110 active:scale-95" id="view-cv-btn">
-          <i data-lucide="file-text" class="w-4 h-4 text-white/90"></i>
-          <span>Interactive CV</span>
-          <i data-lucide="arrow-up-right" class="w-3.5 h-3.5 text-white/60"></i>
-        </button>
       </div>
     </header>
 
@@ -128,7 +122,7 @@
 
           <div class="space-y-4">
             <h2 class="font-display text-4xl sm:text-5xl md:text-6xl font-black leading-[1.1] tracking-tight text-white max-w-4xl">
-              Bridging Machine Learning, <span class="text-blue-500 bg-clip-text">Computer Vision</span> & Complex Engineering.
+              At the intersection of Machine Learning, <span class="text-blue-500 bg-clip-text">Computer Vision</span> & Complex Engineering.
             </h2>
             <p class="text-lg md:text-xl text-white/60 leading-relaxed max-w-3xl">
               Computational Science and Mechanical Engineering alumnus of <b>Boğaziçi University</b>. Award-winning researcher in face analysis and facial dynamics at the Utrecht and Boğaziçi Media Labs. Specialist in building robust mobile/desktop interfaces and decentralized smart systems.
@@ -187,12 +181,12 @@
         <div class="relative min-h-[350px] sm:min-h-[380px] md:min-h-[400px] flex items-center justify-center py-6 select-none overflow-hidden cursor-grab active:cursor-grabbing" id="skills-stage">
           
           <!-- Floating Left & Right Navigation Arrows -->
-          <button onclick="prevSkill(); event.stopPropagation();" class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black/60 hover:bg-blue-500/95 border border-white/10 hover:border-blue-400 text-white/70 hover:text-white flex items-center justify-center transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md z-30 active:scale-95 group" title="Previous skill">
-            <i data-lucide="chevron-left" class="w-5 h-5 sm:w-6 sm:h-6 text-blue-400 group-hover:text-white transition-colors"></i>
+          <button onclick="prevSkill(); event.stopPropagation();" onmousedown="event.stopPropagation();" ontouchstart="event.stopPropagation();" onmouseup="event.stopPropagation();" ontouchend="event.stopPropagation();" class="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/60 hover:bg-blue-500/95 border border-white/10 hover:border-blue-400 text-white/70 hover:text-white flex items-center justify-center transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md z-30 active:scale-95 group" title="Previous skill">
+            <i data-lucide="chevron-left" class="w-4 h-4 md:w-5 md:h-5 text-blue-400 group-hover:text-white transition-colors"></i>
           </button>
           
-          <button onclick="nextSkill(); event.stopPropagation();" class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black/60 hover:bg-blue-500/95 border border-white/10 hover:border-blue-400 text-white/70 hover:text-white flex items-center justify-center transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md z-30 active:scale-95 group" title="Next skill">
-            <i data-lucide="chevron-right" class="w-5 h-5 sm:w-6 sm:h-6 text-blue-400 group-hover:text-white transition-colors"></i>
+          <button onclick="nextSkill(); event.stopPropagation();" onmousedown="event.stopPropagation();" ontouchstart="event.stopPropagation();" onmouseup="event.stopPropagation();" ontouchend="event.stopPropagation();" class="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/60 hover:bg-blue-500/95 border border-white/10 hover:border-blue-400 text-white/70 hover:text-white flex items-center justify-center transition-all duration-300 shadow-[0_4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md z-30 active:scale-95 group" title="Next skill">
+            <i data-lucide="chevron-right" class="w-4 h-4 md:w-5 md:h-5 text-blue-400 group-hover:text-white transition-colors"></i>
           </button>
 
           <!-- 3D Carousel Stage with perspective -->
@@ -555,117 +549,7 @@
       <div>All Rights Reserved</div>
     </footer>
 
-    <!-- Interactive LaTeX-like CV Modal (Same pristine content) -->
-    <div id="cv-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden">
-      <div class="bg-[#0F0F12] border border-[#222227] rounded-[2.5rem] w-full max-w-4xl max-h-[85vh] flex flex-col overflow-hidden shadow-2xl relative">
-        
-        <!-- Modal Header -->
-        <div class="p-6 border-b border-white/5 flex justify-between items-center bg-white/2">
-          <div>
-            <h3 class="text-xl font-bold text-white flex items-center gap-2">
-              <i data-lucide="file-text" class="text-blue-500 w-5 h-5"></i>
-              <span>Digital Academic CV</span>
-            </h3>
-            <p class="text-xs text-teal-400 font-mono font-bold">LaTeX COMPRESSED FORMAT</p>
-          </div>
-          <div class="flex items-center gap-2">
-            <button onclick="copyMarkdownCV()" class="p-2 hover:bg-white/5 rounded-lg border border-white/5 transition-all text-xs font-mono text-white/70 hover:text-white flex items-center gap-1.5" title="Copy Markdown Resume" id="copy-md-btn">
-              <i data-lucide="copy" class="w-4 h-4"></i>
-              <span id="copy-text">Copy MD</span>
-            </button>
-            <button onclick="window.print()" class="p-2 hover:bg-white/5 rounded-lg border border-white/5 transition-all text-xs font-mono text-white/70 hover:text-white flex items-center gap-1.5" title="Print CV">
-              <i data-lucide="printer" class="w-4 h-4 text-teal-400"></i>
-              <span>Print CV</span>
-            </button>
-            <button onclick="closeCVModal()" class="w-8 h-8 rounded-full hover:bg-white/5 flex items-center justify-center text-white/60 hover:text-white border border-white/5 transition-colors font-mono text-xs">
-              ✕
-            </button>
-          </div>
-        </div>
 
-        <!-- Scrollable Curriculum Vitae Content -->
-        <div class="p-8 overflow-y-auto flex-1 space-y-8 text-left text-white/80 print-content" id="printable-cv">
-          <!-- CV Header -->
-          <div class="border-b border-white/10 pb-6">
-            <h1 class="text-3xl font-extrabold text-white tracking-tight">Furkan Gürpınar</h1>
-            <p class="text-sm text-teal-400 font-mono mt-1">gurpinarfurkan@gmail.com • Istanbul, Turkey</p>
-          </div>
-
-          <!-- Education section -->
-          <div class="space-y-4">
-            <h3 class="text-xs font-bold uppercase tracking-widest text-indigo-400 font-mono">Education</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div class="bg-white/2 p-4 rounded-xl border border-white/5">
-                <span class="text-[10px] font-mono text-white/40 block mb-1">2014-2017</span>
-                <h4 class="text-sm font-bold text-white leading-tight">M.S. Computational Science & Engineering</h4>
-                <p class="text-xs text-white/60 mt-1">Boğaziçi University</p>
-              </div>
-              <div class="bg-white/2 p-4 rounded-xl border border-white/5">
-                <span class="text-[10px] font-mono text-white/40 block mb-1">2007-2012</span>
-                <h4 class="text-sm font-bold text-white leading-tight">B.S. Mechanical Engineering</h4>
-                <p class="text-xs text-white/60 mt-1">Boğaziçi University</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Academic Experience -->
-          <div class="space-y-4">
-            <h3 class="text-xs font-bold uppercase tracking-widest text-indigo-400 font-mono">Academic Experience</h3>
-            <div class="space-y-4">
-              <div class="space-y-2">
-                <div class="flex justify-between items-baseline">
-                  <h4 class="text-sm font-bold text-white">Researcher</h4>
-                  <span class="text-xs font-mono text-white/40">2014-2017</span>
-                </div>
-                <p class="text-xs text-teal-400 font-medium">Boğaziçi University Media Laboratory</p>
-                <ul class="list-disc pl-4 space-y-1 text-xs text-white/60">
-                  <li>Video and image based deep transfer learning for face analysis.</li>
-                  <li>Developed neural networks for high-impact emotion and personality expression recognition.</li>
-                </ul>
-              </div>
-
-              <div class="space-y-2">
-                <div class="flex justify-between items-baseline">
-                  <h4 class="text-sm font-bold text-white">Research & Teaching Assistant</h4>
-                  <span class="text-xs font-mono text-white/40">2014-2015</span>
-                </div>
-                <p class="text-xs text-teal-400 font-medium">Kadir Has University</p>
-                <ul class="list-disc pl-4 space-y-1 text-xs text-white/60">
-                  <li>Time series analysis for market prediction models.</li>
-                  <li>Support in teaching Competitive Intelligence and Discrete Mathematics lectures.</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <!-- Work Experience -->
-          <div class="space-y-4">
-            <h3 class="text-xs font-bold uppercase tracking-widest text-indigo-400 font-mono">Work Experience</h3>
-            <div class="space-y-2">
-              <div class="flex justify-between items-baseline">
-                <h4 class="text-sm font-bold text-white">Freelance Software Developer</h4>
-                <span class="text-xs font-mono text-white/40">2010 - Present</span>
-              </div>
-              <p class="text-xs text-teal-400 font-medium">Independent</p>
-              <ul class="list-disc pl-4 space-y-1 text-xs text-white/60">
-                <li>Web design, full responsive client layout, and Search Engine Optimization (SEO).</li>
-                <li>Native Android app development (Java, Kotlin) with local database persistence.</li>
-                <li>Ethereum smart contracts architecture (Solidity, Web3.js) for secure dApps.</li>
-                <li>Real-time image processing systems for smart public transport applications.</li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Publication details -->
-          <div class="space-y-4">
-            <h3 class="text-xs font-bold uppercase tracking-widest text-indigo-400 font-mono">Publications Overview</h3>
-            <div class="space-y-2 text-xs text-white/60" id="cv-pub-target">
-              <!-- Inline listings for clean printing -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- Frontend Interactive Script -->
     <script>
@@ -829,6 +713,13 @@
       let skillIsDragging = false;
       const skillSwipeThreshold = 35;
 
+      // Momentum physics state variables
+      let skillVelocity = 0;
+      let lastDragX = 0;
+      let lastDragTime = 0;
+      let momentumAnimationId = null;
+      let currentFractionalIndex = 0;
+
       // Render Skills Showcase 3D Carousel
       function renderSkills(filter = 'all') {
         const container = document.getElementById("skills-carousel-container");
@@ -939,11 +830,12 @@
           }
         });
 
-        // Update indicators
+        // Update indicators dynamically based on fractional position
         const bulletsContainer = document.getElementById("skills-bullets-container");
         if (bulletsContainer) {
+          const closestIndex = (Math.round(fractionalIndex) % len + len) % len;
           bulletsContainer.innerHTML = currentFilteredSkills.map((_, i) => {
-            const active = i === Math.round(activeSkillIndex);
+            const active = i === closestIndex;
             return `
               <button onclick="setSkillIndex(${i})" class="h-1.5 rounded-full transition-all duration-300 ${active ? 'w-8 bg-blue-500' : 'w-2 bg-white/20 hover:bg-white/40'}" title="Jump to skill ${i + 1}"></button>
             `;
@@ -956,8 +848,13 @@
         const len = currentFilteredSkills.length;
         if (len === 0) return;
         
-        // Boundaries safety
+        if (momentumAnimationId) {
+          cancelAnimationFrame(momentumAnimationId);
+          momentumAnimationId = null;
+        }
+
         activeSkillIndex = (index + len) % len;
+        currentFractionalIndex = activeSkillIndex;
         
         // Restore transitions
         const container = document.getElementById("skills-carousel-container");
@@ -985,6 +882,11 @@
 
       // Filter skills by category
       function filterSkills(category) {
+        if (momentumAnimationId) {
+          cancelAnimationFrame(momentumAnimationId);
+          momentumAnimationId = null;
+        }
+
         // Update active tab styles
         const tabs = document.querySelectorAll("#skills-filter-tabs button");
         tabs.forEach(btn => {
@@ -1004,15 +906,25 @@
         renderSkills(category);
       }
 
-      // Drag, Mouse & Touch events handlers for Skills 3D Carousel
+      // Drag, Mouse & Touch events handlers with Momentum Deceleration
       function startSkillDrag(e) {
         const len = currentFilteredSkills.length;
         if (len === 0) return;
+
+        if (momentumAnimationId) {
+          cancelAnimationFrame(momentumAnimationId);
+          momentumAnimationId = null;
+        }
 
         skillIsDragging = true;
         skillStartX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
         skillCurrentX = skillStartX;
         
+        lastDragX = skillStartX;
+        lastDragTime = Date.now();
+        skillVelocity = 0;
+        currentFractionalIndex = activeSkillIndex;
+
         const stage = document.getElementById("skills-stage");
         if (stage) stage.style.cursor = "grabbing";
 
@@ -1033,16 +945,49 @@
       function skillDragging(e) {
         if (!skillIsDragging) return;
         
-        skillCurrentX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        const currentX = e.type.includes('touch') ? e.touches[0].clientX : e.clientX;
+        skillCurrentX = currentX;
         const diffX = skillCurrentX - skillStartX;
+        
+        const now = Date.now();
+        const dt = now - lastDragTime;
+        if (dt > 0) {
+          // Calculate velocity (pixels per millisecond)
+          const instantVelocity = (currentX - lastDragX) / dt;
+          skillVelocity = skillVelocity * 0.3 + instantVelocity * 0.7; // low-pass filter
+          lastDragX = currentX;
+          lastDragTime = now;
+        } else if (now !== lastDragTime) {
+          lastDragX = currentX;
+          lastDragTime = now;
+        }
         
         const isMobile = window.innerWidth < 640;
         const spacing = isMobile ? 100 : 155;
         
         // Convert pixel displacement to index offset
         const offset = diffX / spacing;
+        currentFractionalIndex = activeSkillIndex - offset;
         
-        updateSkillsCarouselTransforms(activeSkillIndex - offset);
+        updateSkillsCarouselTransforms(currentFractionalIndex);
+      }
+
+      function snapToClosest(targetIndex) {
+        const len = currentFilteredSkills.length;
+        if (len === 0) return;
+        
+        activeSkillIndex = (targetIndex % len + len) % len;
+        currentFractionalIndex = activeSkillIndex;
+
+        const container = document.getElementById("skills-carousel-container");
+        if (container) {
+          const cards = container.querySelectorAll(".skill-carousel-card");
+          cards.forEach(card => {
+            card.style.transition = "transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.45s, filter 0.45s";
+          });
+        }
+
+        updateSkillsCarouselTransforms(activeSkillIndex);
       }
 
       function endSkillDrag() {
@@ -1052,29 +997,73 @@
         const stage = document.getElementById("skills-stage");
         if (stage) stage.style.cursor = "grab";
 
-        // Restore transitions
-        const container = document.getElementById("skills-carousel-container");
-        if (container) {
-          const cards = container.querySelectorAll(".skill-carousel-card");
-          cards.forEach(card => {
-            card.style.transition = "transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.45s, filter 0.45s";
-          });
-        }
-
-        const diffX = skillCurrentX - skillStartX;
         const len = currentFilteredSkills.length;
+        if (len === 0) return;
 
-        if (Math.abs(diffX) > skillSwipeThreshold && len > 0) {
-          const isMobile = window.innerWidth < 640;
-          const spacing = isMobile ? 100 : 155;
-          let offsetVal = Math.round(diffX / spacing);
-          if (offsetVal === 0) {
-            offsetVal = Math.sign(diffX);
-          }
-          activeSkillIndex = ((activeSkillIndex - offsetVal) % len + len) % len;
+        // Reset velocity if user has held still for a while before releasing
+        const timeSinceLastMove = Date.now() - lastDragTime;
+        if (timeSinceLastMove > 80) {
+          skillVelocity = 0;
         }
+
+        const isMobile = window.innerWidth < 640;
+        const spacing = isMobile ? 100 : 155;
         
-        setSkillIndex(activeSkillIndex);
+        // Convert pixel velocity to index velocity
+        let indexVelocity = skillVelocity / spacing;
+        
+        // Limit max velocity to prevent endless spin cycles
+        const maxVel = 0.04;
+        if (Math.abs(indexVelocity) > maxVel) {
+          indexVelocity = Math.sign(indexVelocity) * maxVel;
+        }
+
+        if (Math.abs(indexVelocity) > 0.003) {
+          let lastFrameTime = Date.now();
+          
+          const container = document.getElementById("skills-carousel-container");
+          if (container) {
+            const cards = container.querySelectorAll(".skill-carousel-card");
+            cards.forEach(card => {
+              card.style.transition = "none";
+            });
+          }
+
+          function animateDeceleration() {
+            const now = Date.now();
+            const dt = Math.min(now - lastFrameTime, 100);
+            lastFrameTime = now;
+
+            // Apply friction/decay coefficient per ms
+            const friction = Math.pow(0.992, dt);
+            indexVelocity *= friction;
+
+            // Swipe right (positive velocity) decreases current fractional index (scrolls left)
+            currentFractionalIndex -= indexVelocity * dt;
+            currentFractionalIndex = (currentFractionalIndex % len + len) % len;
+
+            if (Math.abs(indexVelocity) > 0.0008) {
+              updateSkillsCarouselTransforms(currentFractionalIndex);
+              momentumAnimationId = requestAnimationFrame(animateDeceleration);
+            } else {
+              const targetIndex = Math.round(currentFractionalIndex) % len;
+              snapToClosest(targetIndex);
+            }
+          }
+
+          momentumAnimationId = requestAnimationFrame(animateDeceleration);
+        } else {
+          // Snap directly if minimal drag speed
+          const diffX = skillCurrentX - skillStartX;
+          if (Math.abs(diffX) > skillSwipeThreshold) {
+            let offsetVal = Math.round(diffX / spacing);
+            if (offsetVal === 0) {
+              offsetVal = Math.sign(diffX);
+            }
+            activeSkillIndex = ((activeSkillIndex - offsetVal) % len + len) % len;
+          }
+          snapToClosest(activeSkillIndex);
+        }
       }
 
       // Research Publications State & Filter
@@ -1175,17 +1164,6 @@
           `;
         }).join('');
 
-        // Also build inline CV publications view for pristine printing
-        const cvTarget = document.getElementById("cv-pub-target");
-        cvTarget.innerHTML = publications.map((pub, idx) => `
-          <div class="border-b border-white/5 pb-2 pt-2">
-            <span class="text-[10px] font-mono text-teal-400 uppercase font-bold">[${pub.type} • ${pub.year}]</span>
-            <p class="text-xs font-bold text-white">"${pub.title}"</p>
-            <p class="text-[10px] text-white/60 font-mono">${pub.authors}</p>
-            <p class="text-[10px] text-blue-400 font-mono">${pub.venue}</p>
-          </div>
-        `).join('');
-
         // Compile icons
         lucide.createIcons();
       }
@@ -1230,69 +1208,7 @@
         renderPublications();
       }
 
-      // Interactive Academic CV Modal controller
-      function openCVModal() {
-        document.getElementById("cv-modal").classList.remove("hidden");
-        document.body.style.overflow = "hidden"; // Disable back page scrolling
-      }
 
-      function closeCVModal() {
-        document.getElementById("cv-modal").classList.add("hidden");
-        document.body.style.overflow = "auto";
-      }
-
-      // Clipboard Action to Copy Markdown CV Format
-      function copyMarkdownCV() {
-        const mdText = `
-# Furkan Gürpınar
-Email: gurpinarfurkan@gmail.com
-Location: Istanbul, Turkey
-
-## Education
-- **M.S. Computational Science & Engineering** at Boğaziçi University (2014-2017)
-- **B.S. Mechanical Engineering** at Boğaziçi University (2007-2012)
-
-## Academic Experience
-### Researcher - Boğaziçi University Media Laboratory (2014-2017)
-- Video and image based deep transfer learning for face analysis.
-- Developed neural networks for high-impact emotion and personality expression recognition.
-
-### Research & Teaching Assistant - Kadir Has University (2014-2015)
-- Time series analysis for market prediction models.
-- Support in teaching Competitive Intelligence and Discrete Mathematics.
-
-### Teaching Assistant - Boğaziçi University Mechanical Engineering (2010)
-- Support in teaching MATLAB and C for numerical analysis.
-
-## Work Experience
-### Freelance Software Developer (2010 - Present)
-- Web design, development, and SEO optimization.
-- Native Android app development (Java, Kotlin).
-- Smart contract development on Ethereum blockchain (Solidity, Web3.js).
-- High-performance real-time image processing systems.
-
-## Publications
-${publications.map(p => `- **[${p.type}]** "${p.title}" - ${p.authors} (${p.venue}, ${p.year})`).join("\n")}
-
-## Awards
-- **1st place** in ChaLearn Explainable Job Candidate Screening challenge (CVPRW, 2017)
-- **1st place** in ChaLearn First Impressions challenge (ICPR, 2016)
-- **2nd place** in Emotion Recognition in the Wild (EmotiW) challenge (ICMI, 2015)
-        `;
-
-        navigator.clipboard.writeText(mdText.trim()).then(() => {
-          const btn = document.getElementById("copy-md-btn");
-          const copyText = document.getElementById("copy-text");
-          
-          btn.innerHTML = `<i data-lucide="check" class="w-4 h-4 text-emerald-400"></i><span class="text-emerald-400">Copied!</span>`;
-          lucide.createIcons();
-
-          setTimeout(() => {
-            btn.innerHTML = `<i data-lucide="copy" class="w-4 h-4"></i><span id="copy-text">Copy MD</span>`;
-            lucide.createIcons();
-          }, 2000);
-        });
-      }
 
       // Initialize
       window.addEventListener("DOMContentLoaded", () => {
