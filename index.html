@@ -323,11 +323,11 @@
           </div>
 
           <!-- Filter Tabs -->
-          <div class="flex gap-1 bg-white/5 p-1 rounded-full border border-white/5 text-xs font-semibold self-start md:self-auto" id="pub-tabs">
-            <button onclick="setPubFilter('all')" class="tab-btn px-3.5 py-1.5 rounded-full transition-all bg-blue-600 text-white shadow-md">ALL</button>
-            <button onclick="setPubFilter('Journal Paper')" class="tab-btn px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white">JOURNAL</button>
-            <button onclick="setPubFilter('Conference Paper')" class="tab-btn px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white">CONFERENCE</button>
-            <button onclick="setPubFilter('Book Chapter')" class="tab-btn px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white">BOOK</button>
+          <div class="flex gap-1 bg-white/5 p-1 rounded-full border border-white/5 text-xs font-semibold overflow-x-auto whitespace-nowrap max-w-full [scrollbar-width:none] [&::-webkit-scrollbar]:hidden self-stretch sm:self-start md:self-auto" id="pub-tabs">
+            <button onclick="setPubFilter('all')" class="tab-btn shrink-0 px-3.5 py-1.5 rounded-full transition-all bg-blue-600 text-white shadow-md">ALL</button>
+            <button onclick="setPubFilter('Journal Paper')" class="tab-btn shrink-0 px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white">JOURNAL</button>
+            <button onclick="setPubFilter('Conference Paper')" class="tab-btn shrink-0 px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white">CONFERENCE</button>
+            <button onclick="setPubFilter('Book Chapter')" class="tab-btn shrink-0 px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white">BOOK</button>
           </div>
         </div>
 
@@ -1206,9 +1206,9 @@
             (type === 'Conference Paper' && btn.textContent === 'CONFERENCE') ||
             (type === 'Book Chapter' && btn.textContent === 'BOOK')
           ) {
-            btn.className = "px-3.5 py-1.5 rounded-full transition-all bg-blue-600 text-white shadow-md";
+            btn.className = "tab-btn shrink-0 px-3.5 py-1.5 rounded-full transition-all bg-blue-600 text-white shadow-md";
           } else {
-            btn.className = "px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white";
+            btn.className = "tab-btn shrink-0 px-3.5 py-1.5 rounded-full transition-all text-white/40 hover:text-white";
           }
         });
 
