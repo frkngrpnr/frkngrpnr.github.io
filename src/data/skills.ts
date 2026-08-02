@@ -15,6 +15,7 @@ export const skillsData: Skill[] = [
   { name: "SQL", logo: "sql.svg", category: "backend", icon: "Table", color: "from-orange-500/10 to-amber-500/5", border: "border-orange-500/20", text: "text-orange-400" },
   { name: "Android", logo: "android.svg", category: "mobile", icon: "Smartphone", color: "from-lime-500/10 to-emerald-400/5", border: "border-lime-400/20", text: "text-lime-400" },
   { name: "iOS Swift", logo: "ios.svg", category: "mobile", icon: "Tablet", color: "from-orange-600/10 to-red-500/5", border: "border-orange-500/20", text: "text-orange-400" },
+  { name: "Expo", logo: "expo.png", category: "mobile", icon: "Tablet", color: "from-emerald-600/10 to-teal-600/5", border: "border-emerald-500/20", text: "text-emerald-400" },
   { name: "Unity3D", logo: "unity.svg", category: "game_dev", icon: "Gamepad2", color: "from-stone-500/10 to-neutral-500/5", border: "border-stone-500/20", text: "text-stone-300" },
   { name: "Three.js", logo: "threejs.svg", category: "game_dev", icon: "Box", color: "from-zinc-500/10 to-slate-500/5", border: "border-zinc-500/20", text: "text-zinc-300" },
   { name: "Phaser.js", logo: "phaser.svg", category: "game_dev", icon: "Box", color: "from-amber-500/10 to-orange-500/5", border: "border-amber-500/20", text: "text-amber-400" },
