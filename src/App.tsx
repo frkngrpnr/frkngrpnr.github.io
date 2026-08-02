@@ -12,7 +12,7 @@ import { publications } from './data/publications';
 
 export const App: React.FC = () => {
   return (
-    <div className="min-h-screen night-sky-bg text-[#F3F4F6] font-sans selection:bg-blue-600/30 selection:text-blue-200 flex flex-col justify-between p-4 sm:p-8 md:p-16 relative overflow-x-hidden">
+    <div className="min-h-screen night-sky-bg text-[#F3F4F6] font-sans selection:bg-blue-600/30 selection:text-blue-200 flex flex-col justify-between p-4 sm:p-8 md:p-16 relative">
       {/* Background Celestial Parallax Stars & Grids */}
       <StarsBackground />
 
