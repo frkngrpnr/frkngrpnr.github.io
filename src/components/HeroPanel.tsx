@@ -19,7 +19,7 @@ export const HeroPanel: React.FC<HeroPanelProps> = ({ publicationCount }) => {
         <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight text-white max-w-4xl">
           Combining Machine Learning, <span className="text-blue-500">Artificial Intelligence</span> and Computer Vision.
         </h2>
-        <p className="text-lg md:text-xl text-white/60 leading-relaxed max-w-3xl">
+        <p className="text-lg md:text-lg text-white/60 leading-relaxed max-w-3xl">
           Computational Science and Mechanical Engineering alumnus of <b>Boğaziçi University</b>. Award-winning researcher in face analysis and facial dynamics at the Utrecht and Boğaziçi Media Labs. Specialist in building robust mobile/desktop interfaces and decentralized smart systems.
         </p>
       </div>

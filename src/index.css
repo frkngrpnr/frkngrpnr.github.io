@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'IBM Plex Sans', sans-serif;
+  --font-sans: 'Mozilla Text', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
-  --font-display: 'Hanken Grotesk', sans-serif;
+  --font-display: 'Sansation', sans-serif;
 }
 
 @layer utilities {
