@@ -1,27 +1,27 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
-import { 
-  LayoutGrid, 
-  ChevronLeft, 
-  ChevronRight, 
-  Code, 
-  Braces, 
-  Layers, 
-  Atom, 
-  Binary, 
-  Server, 
-  Database, 
-  Terminal, 
-  Table, 
-  Smartphone, 
-  Tablet, 
-  Gamepad2, 
-  Box, 
-  Cpu, 
-  Shield, 
-  Link as LinkIcon 
+import {
+  LayoutGrid,
+  ChevronLeft,
+  ChevronRight,
+  Code,
+  Braces,
+  Layers,
+  Atom,
+  Binary,
+  Server,
+  Database,
+  Terminal,
+  Table,
+  Smartphone,
+  Tablet,
+  Gamepad2,
+  Box,
+  Cpu,
+  Shield,
+  Link as LinkIcon
 } from 'lucide-react';
 import { skillsData } from '../data/skills';
-import { Skill, SkillCategory } from '../types';
+import { Skill, SkillCategory } from '../types.ts';
 
 const iconMap: Record<string, React.FC<{ className?: string }>> = {
   Code,
@@ -257,11 +257,10 @@ export const SkillsPanel: React.FC = () => {
             <button
               key={cat.key}
               onClick={() => handleFilter(cat.key)}
-              className={`px-4 py-2 md:px-3.5 md:py-1.5 rounded-full transition-all shrink-0 ${
-                selectedCategory === cat.key
-                  ? 'bg-blue-600 text-white shadow-md'
-                  : 'text-white/40 hover:text-white'
-              }`}
+              className={`px-4 py-2 md:px-3.5 md:py-1.5 rounded-full transition-all shrink-0 ${selectedCategory === cat.key
+                ? 'bg-blue-600 text-white shadow-md'
+                : 'text-white/40 hover:text-white'
+                }`}
             >
               {cat.label}
             </button>
@@ -274,9 +273,8 @@ export const SkillsPanel: React.FC = () => {
         ref={stageRef}
         onMouseDown={startDrag}
         onTouchStart={startDrag}
-        className={`relative min-h-[350px] sm:min-h-[380px] md:min-h-[400px] flex items-center justify-center py-6 select-none overflow-hidden ${
-          isDragging ? 'cursor-grabbing' : 'cursor-grab'
-        }`}
+        className={`relative min-h-[350px] sm:min-h-[380px] md:min-h-[400px] flex items-center justify-center py-6 select-none overflow-hidden ${isDragging ? 'cursor-grabbing' : 'cursor-grab'
+          }`}
         id="skills-stage"
       >
         {/* Floating Left & Right Navigation Arrows */}
@@ -346,13 +344,15 @@ export const SkillsPanel: React.FC = () => {
                     ? 'none'
                     : 'transform 0.45s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.45s',
                   transformStyle: 'preserve-3d',
+                  //transformStyle: 'flat',
                   backfaceVisibility: 'hidden',
+                  //WebkitMaskImage: '-webkit-radial-gradient(white, black)',
                   willChange: 'transform, opacity',
                   cursor: isDragging ? 'grabbing' : 'grab',
                 }}
               >
                 {/* Background glow */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none`} />
+                <div className={`absolute inset-0 rounded-[1.5rem] bg-gradient-to-br ${skill.color} opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none m-0`} />
 
                 {/* Logo Container */}
                 <div className="w-14 h-14 rounded-2xl bg-white/[0.02] border border-white/5 flex items-center justify-center p-2.5 relative group-hover:scale-110 transition-transform duration-300 shrink-0 z-10">
@@ -396,9 +396,8 @@ export const SkillsPanel: React.FC = () => {
             <button
               key={i}
               onClick={() => snapToClosest(i)}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
-                active ? 'w-8 bg-blue-500' : 'w-2 bg-white/20 hover:bg-white/40'
-              }`}
+              className={`h-1.5 rounded-full transition-all duration-300 ${active ? 'w-8 bg-blue-500' : 'w-2 bg-white/20 hover:bg-white/40'
+                }`}
               title={`Jump to skill ${i + 1}`}
             />
           );
