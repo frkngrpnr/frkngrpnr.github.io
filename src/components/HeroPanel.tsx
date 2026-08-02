@@ -16,7 +16,7 @@ export const HeroPanel: React.FC<HeroPanelProps> = ({ publicationCount }) => {
       </div>
 
       <div className="space-y-4">
-        <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-black leading-[1.1] tracking-tight text-white max-w-4xl">
+        <h2 className="font-display text-4xl sm:text-5xl md:text-6xl font-bold leading-[1.1] tracking-tight text-white max-w-4xl">
           Combining Machine Learning, <span className="text-blue-500">Artificial Intelligence</span> and Computer Vision.
         </h2>
         <p className="text-lg md:text-xl text-white/60 leading-relaxed max-w-3xl">
