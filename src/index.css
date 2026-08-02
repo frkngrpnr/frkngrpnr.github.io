@@ -1,8 +1,84 @@
-* {
-  box-sizing: border-box;
+@import "tailwindcss";
+
+@layer utilities {
+
+  /* Custom scrollbar fine-tunings */
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 9999px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }
 
 body {
   margin: 0;
-  min-height: 100vh;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  background-color: #020204;
+  color: #F3F4F6;
+  touch-action: pan-y;
+}
+
+/* Deep Pitch-Black Night Sky Background Styling */
+.night-sky-bg {
+  background-color: #020204;
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(30, 58, 138, 0.12) 0%, transparent 60%),
+    radial-gradient(circle at 85% 20%, rgba(15, 23, 42, 0.25) 0%, transparent 45%),
+    linear-gradient(180deg, #020204 0%, #04060c 40%, #060912 70%, #020204 100%);
+  background-attachment: fixed;
+}
+
+/* Celestial Starlight Parallax Overlay Layers */
+.stars-layer-1 {
+  background-image:
+    radial-gradient(1px 1px at 25px 35px, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 290px 210px, rgba(186, 230, 253, 0.7), transparent),
+    radial-gradient(1px 1px at 580px 310px, rgba(255, 255, 255, 0.75), transparent),
+    radial-gradient(1px 1px at 870px 360px, rgba(224, 231, 255, 0.65), transparent),
+    radial-gradient(1px 1px at 1150px 270px, rgba(199, 210, 254, 0.7), transparent);
+  background-size: 1300px 480px;
+  background-repeat: repeat;
+  opacity: 0.45;
+  pointer-events: none;
+}
+
+.stars-layer-2 {
+  background-image:
+    radial-gradient(1.5px 1.5px at 140px 90px, rgba(255, 255, 255, 0.95), transparent),
+    radial-gradient(2px 2px at 430px 45px, rgba(224, 231, 255, 0.9), transparent),
+    radial-gradient(1.5px 1.5px at 720px 130px, rgba(165, 243, 252, 0.85), transparent),
+    radial-gradient(2px 2px at 1010px 170px, rgba(255, 255, 255, 0.95), transparent),
+    radial-gradient(1.5px 1.5px at 1310px 80px, rgba(255, 255, 255, 0.85), transparent);
+  background-size: 1100px 420px;
+  background-repeat: repeat;
+  opacity: 0.65;
+  pointer-events: none;
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
 }

@@ -1,0 +1,29 @@
+import { Skill } from '../types';
+
+export const skillsData: Skill[] = [
+  { name: "JavaScript", logo: "javascript.png", category: "frontend", icon: "Code", color: "from-amber-500/10 to-yellow-500/5", border: "border-amber-500/20", text: "text-amber-400" },
+  { name: "TypeScript", logo: "typescript.svg", category: "frontend", icon: "Braces", color: "from-blue-500/10 to-indigo-500/5", border: "border-blue-500/20", text: "text-blue-400" },
+  { name: "Vue", logo: "vue.svg", category: "frontend", icon: "Layers", color: "from-emerald-500/10 to-teal-500/5", border: "border-emerald-500/20", text: "text-emerald-400" },
+  { name: "React", logo: "react.svg", category: "frontend", icon: "Atom", color: "from-sky-500/10 to-cyan-500/5", border: "border-sky-500/20", text: "text-sky-400" },
+  { name: "Angular", logo: "angular.svg", category: "frontend", icon: "Atom", color: "from-red-500/10 to-rose-500/5", border: "border-red-500/20", text: "text-red-400" },
+  { name: "Electron", logo: "electron.svg", category: "frontend", icon: "Atom", color: "from-slate-500/10 to-zinc-500/5", border: "border-slate-500/20", text: "text-slate-300" },
+  { name: "Tauri", logo: "tauri.svg", category: "frontend", icon: "Binary", color: "from-purple-500/10 to-violet-500/5", border: "border-purple-500/20", text: "text-purple-400" },
+  { name: "Node.js", logo: "nodejs.svg", category: "backend", icon: "Server", color: "from-green-500/10 to-lime-500/5", border: "border-green-500/20", text: "text-green-400" },
+  { name: "MongoDB", logo: "mongodb.svg", category: "backend", icon: "Database", color: "from-emerald-600/10 to-teal-600/5", border: "border-teal-500/20", text: "text-teal-400" },
+  { name: "PHP", logo: "php.svg", category: "backend", icon: "Terminal", color: "from-indigo-500/10 to-purple-500/5", border: "border-indigo-500/20", text: "text-indigo-400" },
+  { name: "Python", logo: "python.svg", category: "backend", icon: "Terminal", color: "from-yellow-500/10 to-blue-500/5", border: "border-yellow-500/20", text: "text-blue-400" },
+  { name: "SQL", logo: "sql.svg", category: "backend", icon: "Table", color: "from-orange-500/10 to-amber-500/5", border: "border-orange-500/20", text: "text-orange-400" },
+  { name: "Android", logo: "android.svg", category: "mobile", icon: "Smartphone", color: "from-lime-500/10 to-emerald-400/5", border: "border-lime-400/20", text: "text-lime-400" },
+  { name: "iOS Swift", logo: "ios.svg", category: "mobile", icon: "Tablet", color: "from-orange-600/10 to-red-500/5", border: "border-orange-500/20", text: "text-orange-400" },
+  { name: "Unity3D", logo: "unity.svg", category: "game_dev", icon: "Gamepad2", color: "from-stone-500/10 to-neutral-500/5", border: "border-stone-500/20", text: "text-stone-300" },
+  { name: "Three.js", logo: "threejs.svg", category: "game_dev", icon: "Box", color: "from-zinc-500/10 to-slate-500/5", border: "border-zinc-500/20", text: "text-zinc-300" },
+  { name: "Phaser.js", logo: "phaser.svg", category: "game_dev", icon: "Box", color: "from-amber-500/10 to-orange-500/5", border: "border-amber-500/20", text: "text-amber-400" },
+  { name: "Pixi.js", logo: "pixi.svg", category: "game_dev", icon: "Box", color: "from-cyan-500/10 to-teal-500/5", border: "border-cyan-500/20", text: "text-cyan-400" },
+  { name: "LÖVE", logo: "love.png", category: "game_dev", icon: "Box", color: "from-pink-500/10 to-rose-400/5", border: "border-pink-500/20", text: "text-pink-400" },
+  { name: "MATLAB", logo: "matlab.svg", category: "other", icon: "Binary", color: "from-rose-600/10 to-orange-500/5", border: "border-rose-500/20", text: "text-rose-400" },
+  { name: "R", logo: "r.svg", category: "other", icon: "Binary", color: "from-sky-500/10 to-blue-500/5", border: "border-sky-500/20", text: "text-sky-400" },
+  { name: "C / C++", logo: "cpp.svg", category: "other", icon: "Cpu", color: "from-indigo-600/10 to-blue-600/5", border: "border-indigo-500/20", text: "text-indigo-400" },
+  { name: "C#", logo: "csharp.svg", category: "other", icon: "Cpu", color: "from-violet-600/10 to-purple-600/5", border: "border-violet-500/20", text: "text-violet-400" },
+  { name: "Solidity", logo: "solidity.svg", category: "other", icon: "Shield", color: "from-fuchsia-600/10 to-pink-600/5", border: "border-fuchsia-500/20", text: "text-fuchsia-400" },
+  { name: "Web3.js", logo: "web3.svg", category: "other", icon: "Link", color: "from-yellow-600/10 to-amber-500/5", border: "border-yellow-500/20", text: "text-yellow-400" }
+];
