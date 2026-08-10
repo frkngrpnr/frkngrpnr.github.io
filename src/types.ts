@@ -37,3 +37,13 @@ export interface AwardItem {
   yearBadge: string;
   badgeType: 'FIRST PLACE' | 'SECOND PLACE';
 }
+
+export interface ProjectItem {
+  title: string;
+  description: string;
+  image: string;
+  tags: string[];
+  liveUrl?: string;
+  repoUrl?: string;
+  featured?: boolean;
+}

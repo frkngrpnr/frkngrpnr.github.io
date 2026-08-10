@@ -3,6 +3,7 @@ import { StarsBackground } from './components/StarsBackground';
 import { Header } from './components/Header';
 import { HeroPanel } from './components/HeroPanel';
 import { SkillsPanel } from './components/SkillsPanel';
+import { ProjectsPanel } from './components/ProjectsPanel';
 import { TimelinePanel } from './components/TimelinePanel';
 import { PublicationsPanel } from './components/PublicationsPanel';
 import { AwardsAndReferences } from './components/AwardsAndReferences';
@@ -27,13 +28,16 @@ export const App: React.FC = () => {
         {/* 2. Skills Showcase Panel */}
         <SkillsPanel />
 
-        {/* 3. Work & Academic Experiences Timeline */}
+        {/* 3. Projects Panel */}
+        <ProjectsPanel />
+
+        {/* 4. Work & Academic Experiences Timeline */}
         <TimelinePanel />
 
-        {/* 4. Peer-Reviewed Publications Panel */}
+        {/* 5. Peer-Reviewed Publications Panel */}
         <PublicationsPanel />
 
-        {/* 5. Awards & References Grid */}
+        {/* 6. Awards & References Grid */}
         <AwardsAndReferences />
 
         {/* Social Profiles Row */}
