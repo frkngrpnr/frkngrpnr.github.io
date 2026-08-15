@@ -18,7 +18,7 @@ export const projectsData: ProjectItem[] = [
     title: 'turkish-inflect',
     description:
       'Turkish noun and verb inflection library — vowel harmony, consonant mutation, and case/tense suffixes.',
-    image: './projects/turkish-inflect.jpg',
+    image: './projects/turkish-inflect.png',
     tags: ['Node.js', 'TypeScript'],
     repoUrl: 'https://github.com/f-gee/turkish-inflect',
   },
