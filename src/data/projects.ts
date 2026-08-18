@@ -15,6 +15,16 @@ export const projectsData: ProjectItem[] = [
     featured: true,
   },
   {
+    title: 'Enclave',
+    description:
+      'Multi-tenant SaaS starter with tenant-isolated auth, RBAC, and Postgres RLS — Node/Express + React, real-time via Socket.io',
+    image: './projects/enclave.jpg',
+    tags: ['Multi-tenancy', 'SaaS', 'TypeScript', 'Node.js', 'React', 'PostgreSQL'],
+    liveUrl: 'https://f-gee.github.io/enclave',
+    repoUrl: 'https://github.com/f-gee/enclave',
+    featured: true,
+  },
+  {
     title: 'turkish-inflect',
     description:
       'Turkish noun and verb inflection library — vowel harmony, consonant mutation, and case/tense suffixes.',
