@@ -11,7 +11,7 @@ export const projectsData: ProjectItem[] = [
     image: './projects/wordcraft.jpg',
     tags: ['TypeScript', 'Node.js', 'React', 'SQLite', 'LLM'],
     liveUrl: 'https://wordcraft-7d912.web.app/',
-    repoUrl: 'https://github.com/f-gee/wordcraft',
+    repoUrl: 'https://github.com/tm4to/wordcraft',
     featured: true,
   },
   {
@@ -20,8 +20,8 @@ export const projectsData: ProjectItem[] = [
       'Multi-tenant SaaS starter with tenant-isolated auth, RBAC, and Postgres RLS — Node/Express + React, real-time via Socket.io',
     image: './projects/enclave.jpg',
     tags: ['Multi-tenancy', 'SaaS', 'TypeScript', 'Node.js', 'React', 'PostgreSQL'],
-    liveUrl: 'https://f-gee.github.io/enclave',
-    repoUrl: 'https://github.com/f-gee/enclave',
+    liveUrl: 'https://tm4to.github.io/enclave',
+    repoUrl: 'https://github.com/tm4to/enclave',
     featured: true,
   },
   {
@@ -30,7 +30,7 @@ export const projectsData: ProjectItem[] = [
       'Turkish noun and verb inflection library — vowel harmony, consonant mutation, and case/tense suffixes.',
     image: './projects/turkish-inflect.png',
     tags: ['Node.js', 'TypeScript'],
-    repoUrl: 'https://github.com/f-gee/turkish-inflect',
+    repoUrl: 'https://github.com/tm4to/turkish-inflect',
   },
   {
     title: 'React Wordle',
@@ -38,8 +38,8 @@ export const projectsData: ProjectItem[] = [
       'Wordle clone made with React.js',
     image: './projects/wordle.jpg',
     tags: ['Node.js', 'React', 'TypeScript'],
-    repoUrl: 'https://github.com/f-gee/react-wordle',
-    liveUrl: 'https://f-gee.github.io/react-wordle/',
+    repoUrl: 'https://github.com/tm4to/react-wordle',
+    liveUrl: 'https://tm4to.github.io/react-wordle/',
   },
   {
     title: 'Password Manager',
@@ -47,7 +47,7 @@ export const projectsData: ProjectItem[] = [
       'Offline password manager and generator made with React.js',
     image: './projects/password-manager.jpg',
     tags: ['Node.js', 'React', 'TypeScript'],
-    repoUrl: 'https://github.com/f-gee/password-manager',
-    liveUrl: 'https://f-gee.github.io/password-manager/',
+    repoUrl: 'https://github.com/tm4to/password-manager',
+    liveUrl: 'https://tm4to.github.io/password-manager/',
   },
 ];
